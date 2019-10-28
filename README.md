@@ -7,7 +7,6 @@ Our goal is to develope an online order, reservation and delivery tracking 3-in-
 Our structure will be:
 
 ```
-$ tree -I "<ignore-pattern>" ./p3-joebb-yklin/
 Homepage
 ├── Menu
 ├── Order
