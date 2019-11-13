@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>{{ settings.APP_NAME }}</title>
+</head>
+<body>
+    <h1>Welcome to EverGreen</h1>
+    <p>
+    You can make a reservation here:
+    <a href="/reserves">reservation</a>
+<p>
+{% if user.is_authenticated %}
+<p>Authenticated as
+<pre>
+Name: {{ user.get_full_name }}
+Email: {{ user.email }}
+Id: {{ user.id }}
+</pre>
+</p>
+<p>You can <a href="/accounts/logout">Logout</a></p>
+{% else %}
+<p>You can <a href="/accounts/login">Login</a> if you like.</p>
+{% endif %}
+</p>
+</body>
+</html>

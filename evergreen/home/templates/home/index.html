@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+{% load static %} 
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/html5reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pro_style.css' %}">
+    <title>Evergreen Restaurant.</title>
+  </head>
+  <body>
+    <div class="skip"><a href="#main">Skip to Main Content</a></div>
+    <div class="container">
+
+      <header>
+        <div class="nav">
+          <nav>
+            <ul>
+              <li><a href="#main">About</a></li>
+              <li><a href="#gallery">Gallery</a></li>
+              <li><a href="#menu">Menu</a></li>
+              <li><a href="#order">Order</a></li>
+              <li><a href="#reservation">Reservation</a></li>
+            </ul>
+          </nav>
+      </div>
+      <div class = "cover" id="main">
+        <img src="{% static 'images/logo.png' %}" alt="Evergreen logo"/>
+      </div>
+      <div class = "typewriter">
+      <h1>The right place for the right food!</h1></div>
+      <p>Since 1992, we have consistently served over 3 millions satified customers with delicious, gourmet Chinese cuisine.   Specializing in Mandarin, Sizchuan, Hunan, Shanghai and Taiwan styles of cooking. Evergreen promises only the most authentic flavors with the freshest ingredients, and always at a affordable price.</p>
+      </header>
+      <div class = "mainContent">
+        <div class = "gallery" id = "gallery">
+          <h2>Dishes Gallery</h2>
+          <div class="gcontainer">
+            <div class="mySlides">
+              <div class="numbertext">1 / 12</div>
+              <img src="{% static 'images/dishes/Cashew Chicken.jpg' %}" alt="Cashew Chicken">
+            </div>
+
+            <div class="mySlides">
+              <div class="numbertext">2 / 12</div>
+              <img src="{% static 'images/dishes/Cumin Lamb.jpg' %}" alt="Cumin Lamb">
+            </div>
+
+            <div class="mySlides">
+              <div class="numbertext">3 / 12</div>
+              <img src="{% static 'images/dishes/Kung Pao Chicken.jpg' %}" alt="Kung Pao Chicken">
+            </div>
+              
+            <div class="mySlides">
+              <div class="numbertext">4 / 12</div>
+              <img src="{% static 'images/dishes/Ginger Garlic Eggplant.jpg' %}" alt="Ginger Garlic Eggplant">
+            </div>
+            
+            <div class="mySlides">
+              <div class="numbertext">5 / 12</div>
+              <img src="{% static 'images/dishes/Spicy Orange Flavor Chicken.jpg' %}" alt="Spicy Orange Flavor Chicken">
+            </div>
+              
+            <div class="mySlides">
+              <div class="numbertext">6 / 12</div>
+              <img src="{% static 'images/dishes/Kung Pao Vegetable.jpg' %}" alt="Kung Pao Vegetable">
+            </div>
+
+            <div class="mySlides">
+              <div class="numbertext">7 / 12</div>
+              <img src="{% static 'images/dishes/Onion Beef.jpg' %}" alt="Onion Beef">
+            </div>
+            <div class="mySlides">
+              <div class="numbertext">8 / 12</div>
+              <img src="{% static 'images/dishes/Tofu Home Style.jpg' %}" alt="Tofu Home Style">
+            </div>
+            <div class="mySlides">
+              <div class="numbertext">9 / 12</div>
+              <img src="{% static 'images/dishes/Shrimp & Scallop with Sesame Sauce.jpg' %}" alt="Shrimp & Scallop with Sesame Sauce">
+            </div>
+            <div class="mySlides">
+              <div class="numbertext">10 / 12</div>
+              <img src="{% static 'images/dishes/Beef with Broccoli.jpg' %}" alt="Beef with Broccoli">
+            </div>
+            <div class="mySlides">
+              <div class="numbertext">11 / 12</div>
+              <img src="{% static 'images/dishes/Vegetable Fried Rice.jpg' %}" alt="Vegetable Fried Rice">
+            </div>
+            <div class="mySlides">
+              <div class="numbertext">12 / 12</div>
+              <img src="{% static 'images/dishes/Vegetable rice noodle.jpg' %}" alt="Vegetable rice noodle">
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+
+            <div class="caption-gcontainer">
+              <p id="caption"></p>
+            </div>
+
+            <div class="row" tabindex="0">
+              <div class="column">
+                <img class="demo cursor" src="{% static 'images/dishes/Cashew Chicken.jpg' %}" onclick="currentSlide(1)" alt="Cashew Chicken">
+              </div>
+              <div class="column">
+                <img class="demo cursor" src="{% static 'images/dishes/Cumin Lamb.jpg' %}" onclick="currentSlide(2)" alt="Cumin Lamb">
+              </div>
+              <div class="column">
+                <img class="demo cursor" src="{% static 'images/dishes/Kung Pao Chicken.jpg' %}" onclick="currentSlide(3)" alt="Kung Pao Chicken">
+              </div>
+              <div class="column">
+                <img class="demo cursor" src="{% static 'images/dishes/Ginger Garlic Eggplant.jpg' %}" onclick="currentSlide(4)" alt="Ginger Garlic Eggplant">
+              </div>
+              <div class="column">
+                 <img class="demo cursor" src="{% static 'images/dishes/Spicy Orange Flavor Chicken.jpg' %}" onclick="currentSlide(5)" alt="Spicy Orange Flavor Chicken">
+              </div>    
+              <div class="column">
+                <img class="demo cursor" src="{% static 'images/dishes/Kung Pao Vegetable.jpg' %}" onclick="currentSlide(6)" alt="Vegetable">
+              </div>
+              <div class="column">
+                <img class="demo cursor" src="{% static 'images/dishes/Onion Beef.jpg' %}" onclick="currentSlide(7)" alt="Onion Beef">
+              </div>
+              <div class="column">
+                <img class="demo cursor" src="{% static 'images/dishes/Tofu Home Style.jpg' %}" onclick="currentSlide(8)" alt="Tofu Home Style">
+              </div>
+              <div class="column">
+                <img class="demo cursor" src="{% static 'images/dishes/Shrimp & Scallop with Sesame Sauce.jpg' %}" onclick="currentSlide(9)" alt="Shrimp & Scallop with Sesame Sauce">
+              </div>
+              <div class="column">
+                <img class="demo cursor" src="{% static 'images/dishes/Beef with Broccoli.jpg' %}" onclick="currentSlide(10)" alt="Beef with Broccoli">
+              </div>
+              <div class="column">
+                <img class="demo cursor" src="{% static 'images/dishes/Vegetable Fried Rice.jpg' %}" onclick="currentSlide(11)" alt="Vegetable Fried Rice">
+              </div>
+              <div class="column">
+                <img class="demo cursor" src="{% static 'images/dishes/Vegetable rice noodle.jpg' %}" onclick="currentSlide(12)" alt="Vegetable rice noodle">
+              </div>
+            </div>
+          </div>
+        </div>
+        <script src ="{% static 'js/gallery.js' %}"></script>
+
+  <!--       menu.   -->
+      <div class = "menu" id = "menu"> 
+        <h2>Menu</h2>
+
+        <div class = "introduce">
+          <div class = "card">
+            <h3>1. Cashew Chicken   $7.99</h3>
+            <p>Diced chicken sauteed with water chestnuts, bamboo shoots, green pepper, cashew nuts in brown sauce.</p>
+          </div>
+          <div class = "card">
+            <h3>2. Cumin Lamb   $16.99</h3>
+            <p>Sliced lamb stir fried with air-dried chinese chili, green peper and water chestnuts.</p>
+          </div>
+          <div class = "card">
+            <h3>3. Kung Pao Chicken   $7.99</h3>
+            <p>Diced chicken sauteed in rich brown sauce with chili, water chestnuts, bamboo shoots, carrots and peanuts.</p>
+          </div>
+
+          <div class = "card">
+            <h3>4. Ginger Galric Eggplant   $8.99</h3>
+            <p>Eggplant, water chestnuts, balck fungus, grren onions in ginger garlic sauce.</p>
+          </div>
+          <div class = "card">
+            <h3>5. Spicy Orange Flavor Chicken   $8.99</h3>
+            <p>Chunks of chicken fried and sauteed with orange peel, bamboo shoots, green onion in sweet and spicy sauce.</p>
+          </div>
+
+          <div class = "card">
+            <h3>6. Kung Pao Vegetable   $7.99</h3>
+            <p>Zucchini, carrots, celery, bamboo shoots, green peppers, red peppers & peanuts in Kung Pao sauce.</p>
+          </div>
+          <div class = "card">
+            <h3>7. Onion Beef   $10.99</h3>
+            <p>Sliced beef with onion and green onion with soy sauce.</p>
+          </div>
+          <div class = "card">
+            <h3>8. Tofu Home Style   $8.99</h3>
+            <p>Fresh ToFu with vegetable in spicy House sauce.</p>
+          </div>
+          <div class = "card">
+            <h3>9. Shrimp & Scallop with Sesame Sauce  $10.99</h3>
+            <p>Tender shrimp and scallop coated and fried until crispy, sauteed with garlic and sesame saucte.</p>
+          </div>
+          <div class = "card">
+            <h3>10. Beef with Broccoli  $8.99</h3>
+            <p>Beef with broccoli and bamboo shoots in brown sauce.</p>
+          </div>
+          <div class = "card">
+            <h3>11. Vegetable Fried Rice  $8.99</h3>
+            <p>Stir-fried rice with egg, mushroom, baby corn, carrot, onion, snow pea and green onion.</p>
+          </div>
+          <div class = "card">
+            <h3>12. Vegetable Rice Noodle  $10.99</h3>
+            <p>Stir-fried rice noodle with egg, baby corn, carrot, onion, snow pea, and green onion.</p>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class = "order" id = "order">
+        <h2>Order</h2>
+        <div class = "orderContent">
+          <div class = "decimg">
+          <img src="{% static 'images/order-1.jpg' %}" alt="decoration">
+          <img src="{% static 'images/order-2.jpg' %}" alt="decoration"></div>
+          <a class = "link" href="/reserves"> Order online (TODO) </a>
+        </div>
+      </div>
+      <div class = "reservation" id = "reservation">
+        <h2>Reservation</h2>
+        <div class = "reContent">
+
+          <div class = "reservationimg">
+          <img src="{% static 'images/reservation.png' %}" alt="decoration"></div>
+          <a class = "link" href="/reserves"> Reservation online </a>
+        </div>
+      </div>
+  </div>
+
+</div>
+
+
+
+
+
+    <footer>
+      <p>
+        &copy; Xin Hu & Chiaming Wang</p>
+
+    </footer>
+  </body>
+</html>
