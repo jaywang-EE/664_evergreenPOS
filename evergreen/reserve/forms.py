@@ -1,5 +1,5 @@
 # File: forms.py
-from bootstrap_datepicker_plus import DateTimePickerInput
+#from bootstrap_datepicker_plus import DateTimePickerInput
 from django import forms
 from .models import Reserve
 
