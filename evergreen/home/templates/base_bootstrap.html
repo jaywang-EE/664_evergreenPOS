@@ -1,15 +1,14 @@
 <!DOCTYPE html>
+{% load static %} 
+<html lang="en" dir="ltr">
+
 <html>
 <head>
 <!-- Edit dj4e-samples/settings.py and add APP_NAME = 'DJ4E Samples' or similar -->
-<title>{% block title %}{{ settings.APP_NAME }}{% endblock %}</title>
 
-<!-- Replace this value (42-42) with the one provided by the autograder -->
-<meta name="wa4e" content="42-42">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="wa4e-code" content="99999999">
-
-<link rel="stylesheet"
+<!-- <link rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
   crossorigin="anonymous">
 
@@ -25,15 +24,29 @@
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
-
+ -->
+<!-- link to style sheet -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/html5reset.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/pro_style.css' %}">
 <meta name="wa4e-version" content="2019-10-25">
+<title>{% block title %}{{ settings.APP_NAME }}{% endblock %}</title>
 
 </head>
 <body>
-{% block navbar %} {% endblock %}
-<div class="container">
-    {% block content %}
-    {% endblock %}
+	<div class="skip"><a href="#main">Skip to Main Content</a></div>
+    <div class="container">
+{% block content %}
+
+<!-- {% block navbar %} {% endblock %}
+ -->
+
+
+{% endblock %}
 </div>
+<footer>
+      <p>
+        &copy; Xin Hu & Chiaming Wang</p>
+
+    </footer>
 </body>
 </html>
