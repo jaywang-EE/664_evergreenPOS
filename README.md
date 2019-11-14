@@ -20,8 +20,7 @@ Homepage
     └── Current status of seats(Done)
 
 ```
-
-## Airplane-liked Reservation System
+## Home Page and Login Page
 ### Home page (responsive design)
 <img src="UI/homepage.jpg" />
 
@@ -38,6 +37,7 @@ Homepage
 
 2. clicking on the navigation bar, users can come back to the home page, sign up, log in and log out.
 
+## Airplane-liked Reservation System
 ### Searching System ( GUI coming soon )
 <img src="UI/search.png" />
 
@@ -48,7 +48,6 @@ Homepage
 3. available tables in that time will be shown below  
 
 4. press table U want and redirect to Booking System  
-
 
 ### Booking System (after clicking table button above)
 <img src="UI/detail.png" />
