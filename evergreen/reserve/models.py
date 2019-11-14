@@ -9,8 +9,8 @@ class Reserve(models.Model) :
             validators=[MinLengthValidator(2, "Your name must be greater than 2 characters")]
     )
     date = models.DateField()
-    hour = models.IntegerField(validators=[MaxValueValidator(8), MinValueValidator(0)], 
-                               verbose_name= 'Time(0~8, means 0 p.m. ~ 8 p.m.)')
+    h_candidates = [(i, "%d:00"%i) for i in (11,21)]
+    hour = models.IntegerField(choices=h_candidates, verbose_name='Time you\'ll arrive')
     person     = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(1)], 
                                      verbose_name= 'Number of diners')
     table      = models.ForeignKey('Table', on_delete=models.CASCADE, null=False)
@@ -26,12 +26,15 @@ class TableType(models.Model):
     name = models.CharField(max_length=200)
     min_person = models.IntegerField()
     max_person = models.IntegerField()
+    
     def __str__(self):
         return self.name
 
 class Table(models.Model):
     name = models.CharField(max_length=200)
-    
+    category = models.ForeignKey('TableType', on_delete=models.CASCADE, null=False)
+
     # Shows up in the admin list
     def __str__(self):
-        return "%s (contain %d~%d diners)"%(self.name, self.min_person, self.max_person)
+        return "%s %s (contain %d~%d diners)"%(self.category.name, self.name, 
+            self.category.min_person, self.category.max_person)
