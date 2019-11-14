@@ -22,14 +22,15 @@ class Reserve(models.Model) :
     def __str__(self):
         return self.custom
 
-
-class Table(models.Model) :
-    name = models.CharField(
-            max_length=200,
-            validators=[MinLengthValidator(2, "Your name must be greater than 2 characters")]
-    )
+class TableType(models.Model):
+    name = models.CharField(max_length=200)
     min_person = models.IntegerField()
     max_person = models.IntegerField()
+    def __str__(self):
+        return self.name
+
+class Table(models.Model):
+    name = models.CharField(max_length=200)
     
     # Shows up in the admin list
     def __str__(self):
