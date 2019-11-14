@@ -20,6 +20,22 @@ Homepage
     └── Current status of seats(Done)
 
 ```
+## Home Page and Login Page
+### Home page (responsive design)
+<img src="UI/homepage.jpg" />
+
+1. responsive design, suitable for mobile, tablets and desktop.
+2. clicking on the navigation bar, users can go to every section in this page including About, Gallery, Menu, Order and Reservation.
+3. header part introduces the restaurant and the text has a typewriter effect. 
+4. gallery shows 12 images of dishes and can switch by clicking on the thumbnails of images or the arrows beside the image.
+5. menu shows dishes' names, prices and descriptions. 
+6. green buttons in order section and reservation section can direct users to the corresponding pages(order page has not finished).
+### Login page (responsive design)
+<img src="UI/loginpage.png" />
+
+1. responsive design, suitable for mobile, tablets and desktop.
+
+2. clicking on the navigation bar, users can come back to the home page, sign up, log in and log out.
 
 ## Airplane-liked Reservation System
 ### Searching System ( GUI coming soon )
@@ -32,7 +48,6 @@ Homepage
 3. available tables in that time will be shown below  
 
 4. press table U want and redirect to Booking System  
-
 
 ### Booking System (after clicking table button above)
 <img src="UI/detail.png" />
