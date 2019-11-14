@@ -37,6 +37,7 @@ Homepage
 
 2. clicking on the navigation bar, users can come back to the home page, sign up, log in and log out.
 
+## Airplane-liked Reservation System
 ### Searching System ( GUI coming soon )
 <img src="UI/search.png" />
 
@@ -48,7 +49,6 @@ Homepage
 
 4. press table U want and redirect to Booking System  
 
-## Airplane-liked Reservation System
 ### Booking System (after clicking table button above)
 <img src="UI/detail.png" />
 
