@@ -7,6 +7,8 @@ from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CreateForm
 from datetime import date, datetime
+import pytz
+
 
 from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
 
@@ -22,7 +24,9 @@ class ReserveListView(LoginRequiredMixin, View) :
         tm_str = ""
         if tm:
             try:
-                now = datetime.now()
+                timezone.activate(pytz.timezone('US/Michigan'))
+                
+                now = timezone.localtime(timezone.now())
                 tm = datetime.strptime(tm, "%Y/%m/%d %H:%M")
                 #try:
                 if tm<=now:
