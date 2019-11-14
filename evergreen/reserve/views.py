@@ -1,4 +1,4 @@
-from reserve.models import Reserve
+from reserve.models import Reserve, Table, TableType
 
 from django.views import View
 from django.views import generic
@@ -13,30 +13,20 @@ from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateV
 
 class ReserveListView(LoginRequiredMixin, View) :
     def get(self, request):
-        max_talbe_num = [10, 4]
-        query = request.GET.get('q')
         rl = Reserve.objects.all();
-        if not query: max_talbe_num[0] =  -1
-        else:
-            querys = query.split('.')
-            if len(querys) == 2:
-                now = datetime.now().date()
-                ds, hr = querys
-                d = datetime.strptime(ds, "%Y-%m-%d").date()
-                print(datetime.now().hour)
-                if d > now or (d == now and (int(hr)+12) > datetime.now().hour):
-                    object_list = Reserve.objects.filter(
-                        Q(date__icontains=ds) & Q(hour__icontains=hr) 
-                    )
-                    max_talbe_num[0] = max(max_talbe_num[0]-len(object_list), 0)
-                else:
-                    max_talbe_num[0] = -3
-            else:
-                max_talbe_num[0] = -2
-                #object_list = Reserve.objects.filter(Q(hour__icontains=-1))
-        ctx = { 'rest_small': max_talbe_num[0], 
-                'rest_big': max_talbe_num[1], 
-                'reserve_list': rl};
+        d = request.GET.get('d')
+        hr = int(request.GET.get('h'))
+        valid_input = False
+        if d and hr:
+            now = datetime.now().date()
+            ds = datetime.strptime(d, "%Y-%m-%d").date()
+            if ds > now or (ds == now and (int(hr)) > datetime.now().hour):
+                object_list = Reserve.objects.filter(
+                    Q(date__icontains=ds) & Q(hour__icontains=hr) 
+                )
+                valid_input = True
+                max_talbe_num[0] = max(max_talbe_num[0]-len(object_list), 0)
+        ctx = {'reserve_list': rl};
         return render(request, 'reserves/reserve_list.html', ctx)
 
 class ReserveDetailView(OwnerDetailView):

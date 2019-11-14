@@ -20,7 +20,18 @@
 {% endif %}
 
 <form action="{% url 'reserves:all' %}" method="get">
-  <input name="q" type="text" placeholder="Search...">
+  <input name="d" type="text" placeholder="date in yyyy-mm-dd">
+  <input type="radio" name="h" value="11" checked> 11:00<br>
+  <input type="radio" name="h" value="12"> 12:00<br>
+  <input type="radio" name="h" value="13"> 13:00<br>
+  <input type="radio" name="h" value="14"> 14:00<br>
+  <input type="radio" name="h" value="15"> 15:00<br>
+  <input type="radio" name="h" value="16"> 16:00<br>
+  <input type="radio" name="h" value="17"> 17:00<br>
+  <input type="radio" name="h" value="18"> 18:00<br>
+  <input type="radio" name="h" value="19"> 19:00<br>
+  <input type="radio" name="h" value="20"> 20:00
+  <input type="submit" value="Submit">
 </form>
 <p>
 {% if rest_small >= 0 %}
