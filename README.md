@@ -29,12 +29,13 @@ Homepage
 2. clicking on the navigation bar, users can go to every section in this page including About, Gallery, Menu, Order and Reservation.
 3. header part introduces the restaurant and the text has a typewriter effect. 
 4. gallery shows 12 images of dishes and can switch by clicking on the thumbnails of images or the arrows beside the image.
-5. menu which shows dishes' names, prices and descriptions. 
+5. menu shows dishes' names, prices and descriptions. 
 6. green buttons in order section and reservation section can direct users to the corresponding pages(order page has not finished).
 ### Login page (responsive design)
 <img src="UI/loginpage.png" />
 
 1. responsive design, suitable for mobile, tablets and desktop.
+
 2. clicking on the navigation bar, users can come back to the home page, sign up, log in and log out.
 
 ### Searching System ( GUI coming soon )
