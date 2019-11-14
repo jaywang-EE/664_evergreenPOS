@@ -14,19 +14,37 @@ from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateV
 class ReserveListView(LoginRequiredMixin, View) :
     def get(self, request):
         rl = Reserve.objects.all();
-        d = request.GET.get('d')
-        hr = int(request.GET.get('h'))
-        valid_input = False
-        if d and hr:
-            now = datetime.now().date()
-            ds = datetime.strptime(d, "%Y-%m-%d").date()
-            if ds > now or (ds == now and (int(hr)) > datetime.now().hour):
+        tl = [i for i in range(11, 21)]
+        tm = request.GET.get('d')
+        err_msg = ""
+        tb_list = []
+        val_list = []
+        if tm:
+            #try:
+            now = datetime.now()
+            tm = datetime.strptime(tm, "%Y/%m/%d %H:%M")
+            if tm>now:
+                print(tm.strftime("%Y-%m-%d"))
                 object_list = Reserve.objects.filter(
-                    Q(date__icontains=ds) & Q(hour__icontains=hr) 
+                    Q(date__icontains=tm.strftime("%Y-%m-%d")) & Q(hour__icontains=tm.hour)
                 )
-                valid_input = True
-                max_talbe_num[0] = max(max_talbe_num[0]-len(object_list), 0)
-        ctx = {'reserve_list': rl};
+
+                tb_dict = {}
+                for tb in Table.objects.all():
+                    tb_dict[tb] = True
+                for res in Reserve.objects.all():
+                    tb_dict[res.table] = False
+                tb_list = list(tb_dict.items())
+                val_list = list(tb_dict.values())
+            else:
+                err_msg="No past time!"
+            '''
+            except: 
+                err_msg="Illegal input!"
+            '''
+        else: err_msg = "Select your prefered time."
+
+        ctx = {'reserve_list': rl, 'err_msg': err_msg, 'tb_list': tb_list, 'val_list': val_list, 'time_list':tl};
         return render(request, 'reserves/reserve_list.html', ctx)
 
 class ReserveDetailView(OwnerDetailView):

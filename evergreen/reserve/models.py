@@ -9,8 +9,8 @@ class Reserve(models.Model) :
             validators=[MinLengthValidator(2, "Your name must be greater than 2 characters")]
     )
     date = models.DateField()
-    h_candidates = [(i, "%d:00"%i) for i in (11,21)]
-    hour = models.IntegerField(choices=h_candidates, verbose_name='Time you\'ll arrive')
+    hr_candidates = [(i, "%d:00"%i) for i in range(11,21)]
+    hour = models.IntegerField(choices=hr_candidates, verbose_name='Time you\'ll arrive')
     person     = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(1)], 
                                      verbose_name= 'Number of diners')
     table      = models.ForeignKey('Table', on_delete=models.CASCADE, null=False)
