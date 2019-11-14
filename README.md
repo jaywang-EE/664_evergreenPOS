@@ -20,8 +20,7 @@ Homepage
     └── Current status of seats(Done)
 
 ```
-
-## Airplane-liked Reservation System
+## Home Page and Login Page
 ### Home page (responsive design)
 <img src="UI/homepage.jpg" />
 
@@ -49,7 +48,7 @@ Homepage
 
 4. press table U want and redirect to Booking System  
 
-
+## Airplane-liked Reservation System
 ### Booking System (after clicking table button above)
 <img src="UI/detail.png" />
 
