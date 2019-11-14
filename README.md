@@ -21,6 +21,8 @@ Homepage
 
 ```
 
-##Airplane-liked Reservation System
+## Airplane-liked Reservation System
+### Searching System
 <img src="UI/search.png" />
+### Booking System (after clicking "add a reserve")
 <img src="UI/detail.png" />
