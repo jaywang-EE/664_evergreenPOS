@@ -53,7 +53,7 @@
 <input type="hidden" name="d" value={{tm}} />
 {% for tb, id, val in tb_list %}
 <p>
-{{tb}}: <button name="n" type="submit" value={{id}}>Book {{tb}}</button>
+{{tb}}: {% if val %}<button name="n" type="submit" value={{id}}>Book {{tb}}</button>{%else%}booked{%endif%}
 <p>
 {% endfor %}
 </form>
