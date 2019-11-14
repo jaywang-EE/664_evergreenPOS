@@ -26,6 +26,7 @@ class ReserveListView(LoginRequiredMixin, View) :
                 tm = datetime.strptime(tm, "%Y/%m/%d %H:%M")
                 #try:
                 if tm>now:
+                    print('LG')
                     object_list = Reserve.objects.filter(
                         Q(date__icontains=tm.strftime("%Y-%m-%d")) & Q(hour__icontains=tm.hour)
                     )
@@ -39,6 +40,8 @@ class ReserveListView(LoginRequiredMixin, View) :
                         tb_list.append(("%s_%s"%(tb.category.name, tb.name), tb.id, val))
                     tm_str = tm.strftime("%Y-%m-%d-%H")
                 else:
+                    print(tm.strftime("%Y/%m/%d %H:%M"))
+                    print("NOW",now.strftime("%Y/%m/%d %H:%M"))
                     err_msg="No past time!"
             except: 
                 err_msg="Illegal input!"
