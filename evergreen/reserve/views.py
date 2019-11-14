@@ -25,21 +25,22 @@ class ReserveListView(LoginRequiredMixin, View) :
                 now = datetime.now()
                 tm = datetime.strptime(tm, "%Y/%m/%d %H:%M")
                 #try:
-                if tm>now:
+                if tm<=now:
+                    err_msg="No past time!"
+                elif 10<tm.hour<21:
                     object_list = Reserve.objects.filter(
                         Q(date__icontains=tm.strftime("%Y-%m-%d")) & Q(hour__icontains=tm.hour)
                     )
-
                     tb_dict = {}
                     for tb in Table.objects.all():
                         tb_dict[tb] = True
-                    for res in Reserve.objects.all():
+                    for res in object_list:
                         tb_dict[res.table] = False
                     for tb, val in tb_dict.items():
                         tb_list.append(("%s_%s"%(tb.category.name, tb.name), tb.id, val))
                     tm_str = tm.strftime("%Y-%m-%d-%H")
                 else:
-                    err_msg="No past time!"
+                    err_msg="We open in 11:00~20:00"
             except: 
                 err_msg="Illegal input!"
         else: err_msg = "Select your prefered time."
