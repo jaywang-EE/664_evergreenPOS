@@ -61,13 +61,11 @@
 
 </p>
 <p>
-<a href="{% url 'reserves:reserve_create' %}">Add an Reserve</a> |
 {% if user.is_authenticated %}
 <a href="{% url 'logout' %}?next={% url 'reserves:all' %}">Logout</a>
 {% else %}
 <a href="{% url 'login' %}?next={% url 'reserves:all' %}">Login</a>
 {% endif %}
+| <a href="{% url 'index' %}">Home</a>
 </p>
-<p>
-<a href="{% url 'index' %}">Home</a> |
 {% endblock %}
