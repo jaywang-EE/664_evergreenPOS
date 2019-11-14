@@ -21,10 +21,7 @@ class ReserveListView(LoginRequiredMixin, View) :
         tb_list = []
         tm_str = ""
         if tm:
-            if table_name:
-                print(table_name)
-                return render(request, 'reserves/reserve_form.html', {})
-            else:
+            try:
                 now = datetime.now()
                 tm = datetime.strptime(tm, "%Y/%m/%d %H:%M")
                 #try:
@@ -43,8 +40,8 @@ class ReserveListView(LoginRequiredMixin, View) :
                     tm_str = tm.strftime("%Y-%m-%d-%H")
                 else:
                     err_msg="No past time!"
-                #except: 
-                #    err_msg="Illegal input!"
+            except: 
+                err_msg="Illegal input!"
         else: err_msg = "Select your prefered time."
 
         ctx = {'reserve_list': rl, 'err_msg': err_msg, 'tb_list': tb_list, 
@@ -62,15 +59,14 @@ class ReserveCreateView(OwnerCreateView):
 
     def form_valid(self, form):
         print('form_valid called')
-        print(self.request.user)
+        print(str(self.request.user))
         return super(ReserveCreateView, self).form_valid(form)
 
     def get_initial(self, *args, **kwargs):
         initial = super(ReserveCreateView, self).get_initial(**kwargs)
         #['custom', 'date', 'hour', 'person', 'table']
         dh = datetime.strptime(self.request.GET.get('d'), "%Y-%m-%d-%H")
-        name = self.request.GET.get('n')
-        print("name",name)
+        initial['custom'] = str(self.request.user)
         initial['table'] = Table.objects.get(id=self.request.GET.get('n'))
         initial['date'] = dh.strftime("%Y-%m-%d")
         initial['hour'] = dh.hour
