@@ -10,13 +10,17 @@ Our structure will be:
 
 ```
 Homepage
-├── Menu
+├── Menu(Done)
 ├── Order
 |   ├── Shopping Cart
 |   ├── Order-checking board (For kitchen)
 |   └── Delivery tracking
-└── Reservation
-    ├── Reservation
-    └── Current status of seats
+└── Reservation(Done)
+    ├── Reservation(Done)
+    └── Current status of seats(Done)
 
 ```
+
+##Airplane-liked Reservation System
+<img src="UI/search.png" />
+<img src="UI/detail.png" />
