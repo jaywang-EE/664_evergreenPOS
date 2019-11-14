@@ -24,6 +24,12 @@ Homepage
 ## Airplane-liked Reservation System
 ### Searching System ( GUI coming soon )
 <img src="UI/search.png" />
+1. click block and choose book time
+2. press Submit
+3. available tables in that time will be shown below
+4. press table U want and redirect to Booking System
 
-### Booking System (after clicking "add a reserve")
+### Booking System (after clicking table button above)
 <img src="UI/detail.png" />
+1. Booking System will get time and table automatically
+2. fill in the custom name and number of diners.
