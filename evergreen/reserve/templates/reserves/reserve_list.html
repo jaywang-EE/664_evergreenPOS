@@ -23,7 +23,7 @@
   {% for reserve in reserve_list %}
     {% if reserve.owner == user %}
     <li>
-        <a href="{% url 'reserves:reserve_detail'  reserve.id %}">{{ reserve.date }} {{ reserve.hour }}:00</a>
+        {{ reserve.date }} {{ reserve.hour }}:00 @ Table {{reserve.table.category.name}}_{{reserve.table.name}}
         (<a href="{% url 'reserves:reserve_delete' reserve.id %}">Delete</a>)
         </p>
         {% endif %}
@@ -49,21 +49,23 @@
 {% else %}
 <b>Avalible Tables</b>
 <p>
-{% for tb, val in tb_list %}
-{{tb.category}}_{{tb.name}}: {{val}}
+<form action="{% url 'reserves:reserve_create' %}" method="get">
+<input type="hidden" name="d" value={{tm}} />
+{% for tb, id, val in tb_list %}
+<p>
+{{tb}}: <button name="n" type="submit" value={{id}}>Book {{tb}}</button>
 <p>
 {% endfor %}
+</form>
 {% endif %}
 
 </p>
 <p>
-<a href="{% url 'reserves:reserve_create' %}">Add an Reserve</a> |
 {% if user.is_authenticated %}
 <a href="{% url 'logout' %}?next={% url 'reserves:all' %}">Logout</a>
 {% else %}
 <a href="{% url 'login' %}?next={% url 'reserves:all' %}">Login</a>
 {% endif %}
+| <a href="{% url 'index' %}">Home</a>
 </p>
-<p>
-<a href="{% url 'index' %}">Home</a> |
 {% endblock %}
