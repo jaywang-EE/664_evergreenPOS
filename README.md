@@ -22,7 +22,7 @@ Homepage
 ```
 
 ## Airplane-liked Reservation System
-### Searching System
+### Searching System ( GUI coming soon )
 <img src="UI/search.png" />
 
 ### Booking System (after clicking "add a reserve")
