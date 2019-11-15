@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CreateForm
 from datetime import date, datetime
+from django.utils import timezone
 import pytz
 
 
@@ -23,12 +24,10 @@ class ReserveListView(LoginRequiredMixin, View) :
         tb_list = []
         tm_str = ""
         if tm:
+            timezone.activate(pytz.timezone('US/Michigan'))
+            now = timezone.now()#timezone.localtime()
+            tm = timezone.make_aware(datetime.strptime(tm, "%Y/%m/%d %H:%M"))
             try:
-                timezone.activate(pytz.timezone('US/Michigan'))
-                
-                now = timezone.localtime(timezone.now())
-                tm = datetime.strptime(tm, "%Y/%m/%d %H:%M")
-                #try:
                 if tm<=now:
                     err_msg="No past time!"
                 elif 10<tm.hour<21:
