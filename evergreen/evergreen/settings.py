@@ -17,6 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Used for a default title
 APP_NAME = 'evergreen'   # Add
+USE_TZ   = True
 TIME_ZONE = 'US/Michigan'
 
 # Quick-start development settings - unsuitable for production
