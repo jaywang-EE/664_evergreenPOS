@@ -25,6 +25,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),  # Keep
     url(r'^oauth/', include('social_django.urls', namespace='social')),  # Keep
     path('reserves/', include('reserve.urls')),  # Keep
+    path('orders/', include('orders.urls')),  # Keep
 ]
 
 # Serve the favicon

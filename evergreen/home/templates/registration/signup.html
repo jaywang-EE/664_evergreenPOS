@@ -1,0 +1,50 @@
+{% extends "base_bootstrap.html" %}
+{% load static %} 
+{% block content %}
+	<header>
+	<div class="nav">
+	  <nav>
+	    <ul>
+	      <li><a href="{% url 'index' %}">Back</a></li>
+	      <li><a href="#gallery">Sign up</a></li>
+	      <li><a href="#login">Log in</a></li>
+	      <li><a href="{% url 'logout' %}">Log out</a></li>
+	    </ul>
+	  </nav>
+	</div>
+	<div class = "cover" id="main">
+	<img src={% static 'images/logo.png' %} alt="Evergreen logo"/>
+	</div>
+	<div class = "typewriter">
+	<h1>Please log in to continue.</h1></div>
+	<p>Since 1992, we have consistently served over 3 millions satified customers with delicious, gourmet Chinese cuisine.   Specializing in Mandarin, Sizchuan, Hunan, Shanghai and Taiwan styles of cooking. Evergreen promises only the most authentic flavors with the freshest ingredients, and always at a affordable price.</p>
+
+	</header>
+
+	<div class = "login" id = "login">
+
+	{% if form.errors %}
+
+
+	  <p>Your username and password didn't match. Please try again.</p>
+
+
+	{% endif %}
+
+
+	<form method="post" action="{% url 'login' %}">
+	{% csrf_token %}
+	{{ form.as_p }}
+
+	<input type="submit" class="btn btn-primary" value="Log in" />
+
+	<input type="hidden" name="next" value="{{ next }}" />
+
+	</form>
+	</div>
+
+
+
+
+
+{% endblock %}
