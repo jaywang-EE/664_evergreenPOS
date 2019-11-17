@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CreateForm
+from django import forms
 from datetime import date, datetime
 from django.utils import timezone
 import pytz
@@ -25,7 +26,7 @@ class ReserveListView(LoginRequiredMixin, View) :
         tm_str = ""
         if tm:
             timezone.activate(pytz.timezone('US/Michigan'))
-            now = timezone.now()#timezone.localtime()
+            now = timezone.now()
             tm = timezone.make_aware(datetime.strptime(tm, "%Y/%m/%d %H:%M"))
             try:
                 if tm<=now:
@@ -62,18 +63,33 @@ class ReserveCreateView(OwnerCreateView):
     template_name = "reserves/reserve_form.html"
 
     def form_valid(self, form):
-        print('form_valid called')
-        print(str(self.request.user))
+        print("fv")
+        object = form.save(commit=False)
+        dh = datetime.strptime(self.request.GET.get('d'), "%Y-%m-%d-%H")
+        object.custom = str(self.request.user)
+        object.table = Table.objects.get(id=self.request.GET.get('n'))
+        object.date = dh.strftime("%Y-%m-%d")
+        object.hour = dh.hour
+        '''
+        if object.person>table.category.max_person:
+            raise forms.ValidationError("Table %s con only contain %d diners"%(table, table.category.max_person))
+        if object.person<table.category.min_person:
+            raise forms.ValidationError("Table %s should have at least %d diners"%(table, table.category.min_person))
+        '''
         return super(ReserveCreateView, self).form_valid(form)
 
-    def get_initial(self, *args, **kwargs):
-        initial = super(ReserveCreateView, self).get_initial(**kwargs)
-        #['custom', 'date', 'hour', 'person', 'table']
-        dh = datetime.strptime(self.request.GET.get('d'), "%Y-%m-%d-%H")
-        initial['custom'] = str(self.request.user)
+    def get_form_kwargs(self):
+        kwargs = super( ReserveCreateView, self).get_form_kwargs()
+        # update the kwargs for the form init method with yours
+        print((kwargs))
+        kwargs.update(self.kwargs)  # self.kwargs contains all url conf params
+        return kwargs
+
+    def get_initial(self):
+        initial = super(ReserveCreateView, self).get_initial()
+
         initial['table'] = Table.objects.get(id=self.request.GET.get('n'))
-        initial['date'] = dh.strftime("%Y-%m-%d")
-        initial['hour'] = dh.hour
+
         return initial
 
 class ReserveUpdateView(OwnerUpdateView):

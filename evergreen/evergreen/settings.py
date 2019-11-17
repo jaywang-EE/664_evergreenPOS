@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'home.apps.HomeConfig',  
     'reserve.apps.ReserveConfig',  
+    'orders.apps.OrdersConfig',  
 ]
 
 # When we get to crispy forms :)

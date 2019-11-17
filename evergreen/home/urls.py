@@ -4,8 +4,6 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.HomeView.as_view(), name='index'),
-    # Uncomment this below if you have setup base_bootstrap.html and configured social login
-    # path('accounts/login/', auth_views.LoginView.as_view(template_name=social_login)),
 ]
 
 # The obtuse code below can be ignored - It dynamically switches
@@ -19,6 +17,7 @@ try:
         social_login = 'registration/login_social.html'
         urlpatterns += [
             path('accounts/login/', auth_views.LoginView.as_view(template_name=social_login)),
+            path('accounts/register/', auth_views.LoginView.as_view(template_name=social_login)),
         ]
         print('Using',social_login,'as the login template for',settings.LOGIN_URL)
 except:
