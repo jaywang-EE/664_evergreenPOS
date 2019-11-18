@@ -62,23 +62,26 @@ class OrderListView(LoginRequiredMixin, View) :
             price += sub_price
             cart_list = [(meal.name, meal.id, int(num), sub_price),]
 
-        print(cart_list)
-        print(request.COOKIES)
-        
+        delete_all_list = []
         for k, v in request.COOKIES.items():
             if "meal_id_" in k:
+                if is_delete == "all": 
+                    delete_all_list.append(k)
+                    continue
                 if meal_id==int(k[8:]): continue
                 if k[8:]==is_delete: continue
                 meal = Meal.objects.get(id=int(k[8:]))
                 sub_price = meal.price*int(v)
                 price += sub_price
                 cart_list.append((meal.name, meal.id, int(v), sub_price))
-        print(cart_list)
-        if not (cart_list or cookie_id): err_msg = "Put something into Cart!"
+
+        if not cart_list: err_msg = "Put something into Cart!"
 
         ctx = {'err_msg': err_msg, 'num_list': list(range(1,10)), 'meal_list':ml, 'cart_list': cart_list, 'price':"%.2f"%price}
         response = render(request, 'orders/order_list.html', ctx)
-        if is_delete:
+        if is_delete=="all":
+            [response.delete_cookie(k) for k in delete_all_list]
+        elif is_delete:
             print("del: ",is_delete)
             response.delete_cookie('meal_id_%d'%int(is_delete))
         elif cookie_id:
