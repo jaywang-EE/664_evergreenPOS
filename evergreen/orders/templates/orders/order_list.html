@@ -71,6 +71,9 @@
   <button name="d" type="submit" value={{id}}>delete</button>
   </form>
   {% endfor %}
+  <form action="{% url 'orders:all' %}" method="get">
+  <button name="d" type="submit" value="all">clean cart</button>
+  </form>
   <form action="{% url 'orders:order_create' %}" method="get">
   <button name="s" type="submit" value="OK">place order</button>
   </form>
