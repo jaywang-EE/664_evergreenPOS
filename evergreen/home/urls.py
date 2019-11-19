@@ -1,9 +1,12 @@
 from django.urls import path
 from . import views
+from orders.views import KitchenView, HistoryView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.HomeView.as_view(), name='index'),
+    path('manage', KitchenView.as_view(), name='manage'),
+    path('hist', HistoryView.as_view(), name='hist'),
 ]
 
 # The obtuse code below can be ignored - It dynamically switches

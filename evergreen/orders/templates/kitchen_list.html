@@ -16,27 +16,28 @@
 
 
 {% block content %}
-<h1>Menu</h1>
+<h1>Manage</h1>
 <p>
-{% if meal_list %}
+{% if order_list %}
 <ul>
-  {% for name, meal_list in order_list %}
+  {% for name, time, id, meal_list in order_list %}
     <li>
+    {{name}} {{time}} 
+    <form action="{% url 'manage' %}" method="get">
+    <button name="c" type="submit" value={{id}}>deliver</button>
+    </form>
+    </li>
+    
     {% for meal, num in meal_list %}
       <li>
       {{ meal }}: {{ num }}
       </li>
-    </li>
+    
+    {% endfor %}
   {% endfor %}
 </ul>
 {% endif %}
 
-<p>
-{% if user.is_authenticated %}
-<a href="{% url 'logout' %}?next={% url 'orders:all' %}">Logout</a>
-{% else %}
-<a href="{% url 'login' %}?next={% url 'orders:all' %}">Login</a>
-{% endif %}
-| <a href="{% url 'index' %}">Home</a>
+<a href="{% url 'index' %}">Home</a>
 </p>
 {% endblock %}
