@@ -3,6 +3,7 @@ from django.views import generic
 from django.shortcuts import render
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
 from .forms import CreateForm
 from django import forms
 from datetime import date, datetime
@@ -16,11 +17,27 @@ from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateV
 
 class KitchenView(OwnerListView):
     def get(self, request):
-        if not request.user.is_superuser():
+        if not request.user.is_superuser:
             raise Http404("No MyModel matches the given query.")
-        order_list = []
-        for odr in Order.objects.all(): pass
+        timezone.activate(pytz.timezone('US/Michigan'))
+        confirm_id = request.GET.get('c')
+        if confirm_id: confirm_id=int(confirm_id)
 
+        order_list = []
+        for odr in Order.objects.filter(delivered=False):
+            if odr.id == confirm_id: continue
+            order_list.append([str(odr.owner), timezone.localtime(odr.created_at).strftime("%Y-%m-%d %H:%M"), odr.id, []]) 
+            for mn in MealNum.objects.filter(order=odr):
+                order_list[-1][-1].append((mn.meal.name, mn.num))
+
+        if confirm_id:
+            odr = Order.objects.get(id=confirm_id)
+            odr.delivered_at = timezone.now()
+            odr.delivered = True
+            odr.save()
+
+        ctx = {'err_msg': "", 'order_list': order_list}
+        return render(request, 'kitchen_list.html', ctx)
 
 class HistoryView(LoginRequiredMixin, View) :
     def get(self, request):
@@ -28,10 +45,10 @@ class HistoryView(LoginRequiredMixin, View) :
         timezone.activate(pytz.timezone('US/Michigan'))
         for order in Order.objects.filter(owner=self.request.user):
             price = 0
-            order_list.append([timezone.localtime(order.created_at).strftime("%Y-%m-%d %H:%M"), []])
+            order_list.append([timezone.localtime(order.created_at).strftime("%Y-%m-%d %H:%M"), order.delivered, order.delivered_at, []])
             for mn in MealNum.objects.filter(order=order):
                 price += mn.meal.price*mn.num
-                order_list[-1][1].append((mn.meal.name, mn.num))
+                order_list[-1][-1].append((mn.meal.name, mn.num))
             order_list[-1].append(price)
 
         reserve_list = []
@@ -39,7 +56,7 @@ class HistoryView(LoginRequiredMixin, View) :
             reserve_list.append((str(res.date), res.hour, str(res.table)))
 
         ctx = {'err_msg': "", 'order_list': order_list, 'reserve_list':reserve_list, 'username':str(self.request.user)}
-        return render(request, 'orders/hist_list.html', ctx)
+        return render(request, 'hist_list.html', ctx)
 
 
 class OrderListView(LoginRequiredMixin, View) :

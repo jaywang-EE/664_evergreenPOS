@@ -24,9 +24,9 @@
 <h2>Order</h2>
 {% if order_list %}
 <ul>
-  {% for tm, ml, pr in order_list %}
+  {% for tm, de, dt, ml, pr in order_list %}
     <br>
-    {{tm}} : ${{pr}}
+    {{tm}} : ${{pr}} {% if de %}delivered @ {{dt}}{% else %}prepairing...{% endif %}
     <li>
       {% for m, n in ml %}
       {{m}}: {{n}}
@@ -51,11 +51,13 @@ No order
 No order
 {% endif %}
 
+<p>
+<p>
 
 {% if user.is_authenticated %}
-<a href="{% url 'logout' %}?next={% url 'orders:hist' %}">Logout</a>
+<a href="{% url 'logout' %}?next={% url 'hist' %}">Logout</a>
 {% else %}
-<a href="{% url 'login' %}?next={% url 'orders:hist' %}">Login</a>
+<a href="{% url 'login' %}?next={% url 'hist' %}">Login</a>
 {% endif %}
 | <a href="{% url 'index' %}">Home</a>
 | <a href="{% url 'orders:all' %}">order</a>
