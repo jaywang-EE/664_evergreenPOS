@@ -13,7 +13,7 @@
 	  </nav>
 	</div>
 	<div class = "cover" id="main">
-	<img src={% static 'images/logo.png' %} alt="Evergreen logo"/>
+	<img src={% static "images/logo.png" %} alt="Evergreen logo"/>
 	</div>
 	<div class = "typewriter">
 	<h1>Please log in to continue.</h1></div>
@@ -21,7 +21,7 @@
 
 	</header>
 
-	<div class = "login" id = "login">
+	<div class = "signup" id = "signup">
 
 	{% if form.errors %}
 
@@ -32,11 +32,11 @@
 	{% endif %}
 
 
-	<form method="post" action="{% url 'login' %}">
+	<form method="post" >
 	{% csrf_token %}
 	{{ form.as_p }}
 
-	<input type="submit" class="btn btn-primary" value="Log in" />
+	<input type="submit" class="btn btn-primary" value="Sign up" />
 
 	<input type="hidden" name="next" value="{{ next }}" />
 
