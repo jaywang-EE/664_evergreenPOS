@@ -18,14 +18,16 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
+from .views import  signup
 
 urlpatterns = [
-    path('', include('home.urls')),  # Keep
+    path('home', include('home.urls')),  # Keep
     path('admin/', admin.site.urls),  # Keep
     path('accounts/', include('django.contrib.auth.urls')),  # Keep
     url(r'^oauth/', include('social_django.urls', namespace='social')),  # Keep
     path('reserves/', include('reserve.urls')),  # Keep
     path('orders/', include('orders.urls')),  # Keep
+    url(r'^signup/$', signup, name='signup'),
 ]
 
 # Serve the favicon
