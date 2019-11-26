@@ -21,7 +21,7 @@ from django.contrib.auth import views as auth_views
 from .views import  signup
 
 urlpatterns = [
-    path('home', include('home.urls')),  # Keep
+    path('', include('home.urls')),  # Keep
     path('admin/', admin.site.urls),  # Keep
     path('accounts/', include('django.contrib.auth.urls')),  # Keep
     url(r'^oauth/', include('social_django.urls', namespace='social')),  # Keep
