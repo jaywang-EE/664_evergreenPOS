@@ -181,6 +181,12 @@ header p{
   background-image: -o-linear-gradient(to bottom,#f0ad4e 0,#eb9316 100%);
   background-image: linear-gradient(to bottom,#f0ad4e 0,#eb9316 100%);
 }
+.mainContent h1{
+	font-size: 2.6em;
+	text-align: left;
+    margin: 2% 4%;
+    padding: 0;
+}
 .mainContent > div{
   margin:0 0;
 }
@@ -350,7 +356,7 @@ text-align: center;
 }
 .menu .control h3{
   color: #31708f;
-	
+
 }
 .card .column img{
 	height: 200px;

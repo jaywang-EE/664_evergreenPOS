@@ -2,26 +2,31 @@
 {% load static %} 
 {% load humanize %} 
 
-{% block hdr %}
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Static Example</title>
-
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-  <!-- XDSoft DateTimePicker -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
-{% endblock %}
-
-
 {% block content %}
-<h1>History</h1>
+<header class="general">
+<div class="nav">
+  <nav>
+    <ul>
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'orders:all' %}">Order</a></li>
+      <li><a href="{% url 'reserves:all' %}">Reservation</a></li>
+      <li><a href="{% url 'logout' %}?next={% url 'orders:all' %}">Log out</a></li>
+    </ul>
+  </nav>
+</div>
 
-<h2>Hi! {{username}}</h2>
+<div class = "typewriter">
+<h1>History of Orders & Reservations</h1></div>
+<p>Address: 2771 Plymouth Rd, Ann Arbor, MI 48105(734)-769-2748.
+</br>email: business@evergreen-restaurant.com</p>
+</header>
 
-<h2>Order</h2>
+<div class = "mainContent" id = "main">
+<h1>Hi! {{username}}</h1>
+
+<div class = "menu" id = "menu"> 
+
+<h2>Order History</h2>
 {% if order_list %}
 <ul>
   {% for tm, de, dt, ml, pr in order_list %}
@@ -31,36 +36,24 @@
       {% for m, n in ml %}
       {{m}}: {{n}}
       {% endfor %}
+    </li>
     
   {% endfor %}
 </ul>
 {%else%}
 No order
 {% endif %}
-
-<p>
-<h2>Reservations</h2>
+<h2>Reservations History</h2>
 {% if reserve_list %}
 <ul>
   {% for d, h, t in reserve_list %}
     <li>
-    {{d}} {{h}}:00 {{t}} 
+    {{d}} {{h}}:00 {{t}} </li>
   {% endfor %}
 </ul>
 {%else%}
 No order
 {% endif %}
-
-<p>
-<p>
-
-{% if user.is_authenticated %}
-<a href="{% url 'logout' %}?next={% url 'hist' %}">Logout</a>
-{% else %}
-<a href="{% url 'login' %}?next={% url 'hist' %}">Login</a>
-{% endif %}
-| <a href="{% url 'index' %}">Home</a>
-| <a href="{% url 'orders:all' %}">order</a>
-| <a href="{% url 'reserves:all' %}">reserve</a>
-</p>
+</div>
+</div>
 {% endblock %}

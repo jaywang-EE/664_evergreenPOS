@@ -7,15 +7,16 @@
 <div class="nav">
   <nav>
     <ul>
-      <li><a href="{% url 'index' %}">Back</a></li>
+      <li><a href="{% url 'index' %}">Home</a></li>
       <li><a href="{% url 'hist' %}">History</a></li>
+      <li><a href="{% url 'reserves:all' %}">Reservation</a></li>
       <li><a href="{% url 'logout' %}?next={% url 'orders:all' %}">Log out</a></li>
     </ul>
   </nav>
 </div>
 
 <div class = "typewriter">
-<h1>The Right Place for The Right Food.</h1></div>
+<h1>Order Meals Online</h1></div>
 <p>Address: 2771 Plymouth Rd, Ann Arbor, MI 48105(734)-769-2748.
 </br>email: business@evergreen-restaurant.com</p>
 </header>
