@@ -77,7 +77,7 @@ class OrderListView(LoginRequiredMixin, View) :
             cookie_id = "meal_id_%d"%meal_id
             sub_price = meal.price*num
             price += sub_price
-            cart_list = [(meal.name, meal.id, int(num), sub_price),]
+            cart_list = [(meal.name, meal.image_url, meal.id, int(num), sub_price),]
 
         delete_all_list = []
         for k, v in request.COOKIES.items():
@@ -90,9 +90,9 @@ class OrderListView(LoginRequiredMixin, View) :
                 meal = Meal.objects.get(id=int(k[8:]))
                 sub_price = meal.price*int(v)
                 price += sub_price
-                cart_list.append((meal.name, meal.id, int(v), sub_price))
+                cart_list.append((meal.name, meal.image_url, meal.id, int(v), sub_price))
 
-        if not cart_list: err_msg = "Put something into Cart!"
+        if not cart_list: err_msg = "Please pick something into cart~"
 
         ctx = {'err_msg': err_msg, 'num_list': list(range(1,10)), 'meal_list':ml, 'cart_list': cart_list, 'price':"%.2f"%price}
         response = render(request, 'orders/order_list.html', ctx)
