@@ -34,7 +34,7 @@
       <li>
       <div id = "form">
       <form action="{% url 'orders:all' %}" method="get">
-        <h3> {{ meal.name }} {{ meal.price }}</h3>
+        <h3> {{ meal.name }} {{ meal.price }}$</h3>
       <div id = "press">
       <label for="{{meal.name}}">num: </label>
       <select name="n" id = "{{meal.name}}">
@@ -73,9 +73,16 @@
 </h3>
 {% elif cart_list %}
 <div class = "introduce">
+  <form action="{% url 'orders:all' %}" method="get">
+  <button name="d" type="submit" value="all">clean cart</button>
+  </form>
+  <form action="{% url 'orders:order_create' %}" method="get">
+  <button name="s" type="submit" value="OK">place order</button>
+  </form>
+  <h3>total price: {{ price }}$</h3>
   {% for name, url, id, num, sub_price in cart_list %}
   <div class = "card">
-  {{name}}: {{sub_price}}
+    <h3>{{name}}: {{sub_price}}$</h3>
     <form action="{% url 'orders:all' %}" method="get">
     <select name="n">
       {% for i in num_list %}
@@ -89,21 +96,15 @@
     </select>
     <button name="m" type="submit" value={{id}}>change num</button>
     </form>
-    <form action="{% url 'orders:all' %}" method="get">
-    <button name="d" type="submit" value={{id}}>delete</button>
     <div class="column">
       <img src="{% static 'images/dishes/'|add:url %}" alt="{{name}}">
     </div>
+    <form action="{% url 'orders:all' %}" method="get">
+      <button name="d" type="submit" value={{id}}>delete</button>
     </form>
   </div>
   {% endfor %}
-  <form action="{% url 'orders:all' %}" method="get">
-  <button name="d" type="submit" value="all">clean cart</button>
-  </form>
-  <form action="{% url 'orders:order_create' %}" method="get">
-  <button name="s" type="submit" value="OK">place order</button>
-  </form>
-  total price: {{ price }}
+
 </div>
 {% endif %}
 </div>

@@ -272,6 +272,7 @@ header p{
   display: grid;
   grid-template-columns: auto;
   grid-gap: 10px;
+  text-align: center;
 
 }
 
@@ -296,9 +297,9 @@ text-align: center;
   margin: 5px;
   margin-bottom: 10px;
 }
-.card button{
+.introduce button{
   padding:0.3em 1.2em;
-  margin:0 0.1em 0.1em 0;
+  margin:0.5em 0.1em 1em 0.6em;
   border:0.1em solid rgba(255,255,255,0);
   border-radius:2em;
   box-sizing: border-box;
@@ -309,11 +310,12 @@ text-align: center;
   background-image: linear-gradient(to bottom,#f0ad4e 0,#eb9316 100%);
 
 }
-.card button:hover{
+
+.introduce button:hover{
   color:black;
   border-color:black;
 }
-.card button:focus{
+.introduce button:focus{
   color:black;
   border-color:black;
 }
