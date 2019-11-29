@@ -105,14 +105,14 @@ footer p{
 
 }
 
-header{
+.homePage{
   display: flex;
   flex-direction: column;
-  background-attachment: fixed; /* Parallax effect */
+  background-attachment: fixed; 
   background-image: url("../images/banner.jpg");     
-  background-position: center;  /* Parallax effect */
-  background-repeat: no-repeat; /* Parallax effect */
-  background-size: cover;       /* Parallax effect */
+  background-position: center;  
+  background-repeat: no-repeat; 
+  background-size: cover;    
   color: white;
   min-height: 400px;                /* Parallax effect */
 }
@@ -145,19 +145,35 @@ header p{
   text-align: center;
 }
 
+/*for menu and reservation
+*/
+
+.general{
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  background-attachment: fixed;
+  background-image: url("../images/menu_header.png");     
+  background-position: center;  
+  background-repeat: no-repeat; 
+  background-size: cover;       
+  color: white;
+  min-height: 200px;       
+}
+
 .nav{
   margin-bottom: 20px: 
   align-self: space-around;
   background-color: rgba(227, 144, 58, 0.3);
   text-align: center; 
   padding: 10px 0;
-  
+  flex: start;
   margin: 0;
 
 }
 .mainContent h2{
   text-align: center;
-  padding:1.4% 0;
+  padding:1% 0;
   margin-bottom: 1.5%;
   color: white;
   background-image: -webkit-linear-gradient(to bottom,#f0ad4e 0,#eb9316 100%);
@@ -194,7 +210,7 @@ header p{
   text-align:center;
 }
 .mySlides img{
-  height: 300px;
+  height: 250px;
   max-width: 100%;
   overflow: hidden;
 
@@ -263,10 +279,49 @@ header p{
   margin:2%;
   text-align: center;
   line-height: 1.5;
-    background-image: url("../images/light-veneer.png");
+  background-image: url("../images/light-veneer.png");
 
 }
+.card li{
+  list-style-type:none;
+}
+.card .column{
+  text-align: center;
+  max-height: 200px;
+}
+.card #form{
+text-align: center;
+}
+.card #press{
+  margin: 5px;
+  margin-bottom: 10px;
+}
+.card button{
+  padding:0.3em 1.2em;
+  margin:0 0.1em 0.1em 0;
+  border:0.1em solid rgba(255,255,255,0);
+  border-radius:2em;
+  box-sizing: border-box;
+  text-decoration:none;
+  color:white;
+  text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+  font-size: 1em;
+  background-image: linear-gradient(to bottom,#f0ad4e 0,#eb9316 100%);
 
+}
+.card button:hover{
+  color:black;
+  border-color:black;
+}
+.card button:focus{
+  color:black;
+  border-color:black;
+}
+
+.card .column img{
+	height: 200px;
+	max-width: 100%;
+}
 .introduce h3{ 
   color: black;
   padding: 5px 0;
@@ -345,7 +400,7 @@ header p{
 }
 
 .login{
-  margin:2% 20%;
+  margin:3% 20%;
 
 }
 .login li{
@@ -402,7 +457,7 @@ input[type=submit]:focus{
 
   header p{
 
-    margin:0 5%;
+    margin:0% 5%;
     font-size: 1.5em;
 
   }
@@ -438,8 +493,8 @@ input[type=submit]:focus{
 
   }
 
-  .column img{
-    height: 150px;
+  .gallery .column img{
+    height: 120px;
     min-width: 20%;
   }
 
@@ -472,14 +527,17 @@ input[type=submit]:focus{
   }
 
   .login{
-    margin:2% 30%;
+    margin:6% 30%;
 
   }
 
-  header{
-    min-height: 550px;
+ .homePage{
+    min-height: 500px;
   }
+  .general{
+    min-height: 300px;
 
+  }
   footer{
     position: static;
     left: 0;
@@ -502,7 +560,9 @@ input[type=submit]:focus{
       typing 3.5s steps(40, end),
       blink-caret .75s step-end 6;
   }
-
+  .general p{
+    margin-top:2%;
+  }
   /* The typing effect */
   @keyframes typing {
     from { width: 0 }

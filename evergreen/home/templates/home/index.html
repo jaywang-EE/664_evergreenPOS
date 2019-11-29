@@ -12,7 +12,7 @@
     <div class="skip"><a href="#main">Skip to Main Content</a></div>
     <div class="container">
 
-      <header>
+      <header class = "homePage">
         <div class="nav">
           <nav>
             <ul>
@@ -21,6 +21,12 @@
               <li><a href="#menu">Menu</a></li>
               <li><a href="#order">Order</a></li>
               <li><a href="#reservation">Reservation</a></li>
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'logout' %}?next={% url 'index' %}">Logout</a></li>
+              {% else %}
+              <a href="{% url 'login' %}?next={% url 'index' %}">Login</a>
+              {% endif %}
+
             </ul>
           </nav>
       </div>
