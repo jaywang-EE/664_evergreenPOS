@@ -297,7 +297,8 @@ text-align: center;
   margin: 5px;
   margin-bottom: 10px;
 }
-.introduce button{
+
+.card button{
   padding:0.3em 1.2em;
   margin:0.5em 0.1em 1em 0.6em;
   border:0.1em solid rgba(255,255,255,0);
@@ -311,15 +312,35 @@ text-align: center;
 
 }
 
-.introduce button:hover{
+.card button:hover{
   color:black;
   border-color:black;
 }
-.introduce button:focus{
+.card button:focus{
   color:black;
   border-color:black;
 }
-
+.introduce>form button{
+  padding:0.5em 1.2em;
+  border:0.1em solid rgba(255,255,255,0);
+  box-sizing: border-box;
+  text-decoration:none;
+  color:white;
+  text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+  font-size: 1em;
+  background-image: -webkit-linear-gradient(to bottom,#5cb85c 0,#419641 100%);
+  background-image: -moz-linear-gradient(to bottom,#5cb85c 0,#419641 100%);
+  background-image: -o-linear-gradient(to bottom,#5cb85c 0,#419641 100%);
+  background-image: linear-gradient(to bottom,#5cb85c 0,#419641 100%);
+}
+.introduce>form button:hover{
+  color:black;
+  border-color:black;
+}
+.introduce>form button:focus{
+  color:black;
+  border-color:black;
+}
 .card .column img{
 	height: 200px;
 	max-width: 100%;
