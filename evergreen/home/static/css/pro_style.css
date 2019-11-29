@@ -446,8 +446,17 @@ text-align: center;
 }
 .login li{
 margin: 2% 0;
+color: blue;
 }
+.login .errorlist li{
+color: red;
 
+} 
+.login span{
+  color: blue;
+  padding-bottom: 16px;
+
+}
 .login p{
   text-align: left;
   margin: 0;
@@ -474,7 +483,7 @@ input[type=submit] {
   font-size:1em;
   width: 30%;
   display: block;
-  margin: 0 auto;
+  margin: 10px auto;
 }
 input[type=submit]:hover{
   filter: drop-shadow(4px 4px 4px black);
