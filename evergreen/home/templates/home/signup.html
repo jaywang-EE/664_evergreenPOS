@@ -1,27 +1,22 @@
 {% extends "base_bootstrap.html" %}
 {% load static %} 
 {% block content %}
-	<header>
-	<div class="nav">
+	<header class="general">
+	<div class="nav" id = "nav">
 	  <nav>
 	    <ul>
 	      <li><a href="{% url 'index' %}">Back</a></li>
-	      <li><a href="#gallery">Sign up</a></li>
-	      <li><a href="#login">Log in</a></li>
-	      <li><a href="{% url 'logout' %}">Log out</a></li>
+	      <li><a href="{% url 'login' %}">Log in</a></li>
 	    </ul>
 	  </nav>
 	</div>
-	<div class = "cover" id="main">
-	<img src={% static "images/logo.png" %} alt="Evergreen logo"/>
-	</div>
 	<div class = "typewriter">
-	<h1>Please log in to continue.</h1></div>
-	<p>Since 1992, we have consistently served over 3 millions satified customers with delicious, gourmet Chinese cuisine.   Specializing in Mandarin, Sizchuan, Hunan, Shanghai and Taiwan styles of cooking. Evergreen promises only the most authentic flavors with the freshest ingredients, and always at a affordable price.</p>
+	<h1>Please sign up to continue.</h1></div>
+	<p>After loging in, you can place orders and make reservations.</p>
 
 	</header>
 
-	<div class = "signup" id = "signup">
+	<div class = "login" id = "main">
 
 	{% if form.errors %}
 

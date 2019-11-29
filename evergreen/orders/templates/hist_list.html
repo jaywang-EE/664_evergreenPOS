@@ -28,29 +28,37 @@
 
 <h2>Order History</h2>
 {% if order_list %}
-<ul>
+<div class = "introduce">
   {% for tm, de, dt, ml, pr in order_list %}
-    <br>
-    {{tm}} : ${{pr}} {% if de %}delivered @ {{dt}}{% else %}prepairing...{% endif %}
-    <li>
+    <div class = "card">
+    <p>
+    {{tm}} : ${{pr}} {% if de %}delivered @ {{dt}}{% else %}prepairing...{% endif %}</p>
+    <ul>
       {% for m, n in ml %}
+      <li>
       {{m}}: {{n}}
+      </li>
       {% endfor %}
-    </li>
-    
+    </ul>
+    </div>
   {% endfor %}
-</ul>
+</div>
 {%else%}
 No order
 {% endif %}
+
 <h2>Reservations History</h2>
 {% if reserve_list %}
-<ul>
+<div class = "introduce">
   {% for d, h, t in reserve_list %}
+    <div class = "card">
+    <ul>
     <li>
     {{d}} {{h}}:00 {{t}} </li>
+    </div>
+  </ul>
   {% endfor %}
-</ul>
+</div>
 {%else%}
 No order
 {% endif %}
