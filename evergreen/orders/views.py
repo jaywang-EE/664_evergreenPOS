@@ -91,9 +91,8 @@ class OrderListView(LoginRequiredMixin, View) :
                 sub_price = meal.price*int(v)
                 price += sub_price
                 cart_list.append((meal.name, meal.image_url, meal.id, int(v), sub_price))
-
         if not cart_list: err_msg = "Please pick something into cart~"
-
+        else: cart_list.sort()
         ctx = {'err_msg': err_msg, 'num_list': list(range(1,10)), 'meal_list':ml, 'cart_list': cart_list, 'price':"%.2f"%price}
         response = render(request, 'orders/order_list.html', ctx)
         if is_delete=="all":
