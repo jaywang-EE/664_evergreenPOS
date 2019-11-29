@@ -73,30 +73,29 @@
 </h3>
 {% elif cart_list %}
 <div class = "introduce">
-  {% for name, id, num, sub_price in cart_list %}
+  {% for name, url, id, num, sub_price in cart_list %}
   <div class = "card">
-
   {{name}}: {{sub_price}}
-  <form action="{% url 'orders:all' %}" method="get">
-  <select name="n">
-    {% for i in num_list %}
+    <form action="{% url 'orders:all' %}" method="get">
+    <select name="n">
+      {% for i in num_list %}
 
-      {% if i == num %}
-      <option selected="selected">{{i}}</option>
-      {% else %}
-      <option>{{i}}</option>
-      {% endif %}
-    {% endfor %}
-  </select>
-  <button name="m" type="submit" value={{id}}>change num</button>
-  </form>
-  <form action="{% url 'orders:all' %}" method="get">
-  <button name="d" type="submit" value={{id}}>delete</button>
-<!--   <div class="column">
-    <img src="{% static 'images/dishes/'|add:meal.image_url %}" alt="{{meal.name}}">
-  </div> -->
-  </form>
-</div>
+        {% if i == num %}
+        <option selected="selected">{{i}}</option>
+        {% else %}
+        <option>{{i}}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+    <button name="m" type="submit" value={{id}}>change num</button>
+    </form>
+    <form action="{% url 'orders:all' %}" method="get">
+    <button name="d" type="submit" value={{id}}>delete</button>
+    <div class="column">
+      <img src="{% static 'images/dishes/'|add:url %}" alt="{{name}}">
+    </div>
+    </form>
+  </div>
   {% endfor %}
   <form action="{% url 'orders:all' %}" method="get">
   <button name="d" type="submit" value="all">clean cart</button>
