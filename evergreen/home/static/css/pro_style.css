@@ -320,7 +320,7 @@ text-align: center;
   color:black;
   border-color:black;
 }
-.introduce>form button{
+.menu .control button{
   padding:0.5em 1.2em;
   border:0.1em solid rgba(255,255,255,0);
   box-sizing: border-box;
@@ -333,13 +333,24 @@ text-align: center;
   background-image: -o-linear-gradient(to bottom,#5cb85c 0,#419641 100%);
   background-image: linear-gradient(to bottom,#5cb85c 0,#419641 100%);
 }
-.introduce>form button:hover{
+.menu .control button:hover{
   color:black;
   border-color:black;
 }
-.introduce>form button:focus{
+.menu .control button:focus{
   color:black;
   border-color:black;
+}
+.menu .control{
+  display: grid;
+  justify-content: center;
+  align-content:center;
+  text-align: center;
+  grid-gap: 5px;
+}
+.menu .control h3{
+  color: #31708f;
+	
 }
 .card .column img{
 	height: 200px;
@@ -533,7 +544,11 @@ input[type=submit]:focus{
   .numbertext {
   position: absolute;
   }
-
+  .menu .control{
+	  display: flex;
+	  justify-content: space-around;
+	  text-align: center;
+  }
   .introduce{
     grid-template-columns: 1fr 1fr;
     grid-gap: 30px;

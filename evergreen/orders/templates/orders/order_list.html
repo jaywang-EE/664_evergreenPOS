@@ -19,7 +19,7 @@
 <p>Address: 2771 Plymouth Rd, Ann Arbor, MI 48105(734)-769-2748.
 </br>email: business@evergreen-restaurant.com</p>
 </header>
-<div class = "mainContent">
+<div class = "mainContent" id = "main">
 
   <div class = "menu" id = "menu"> 
 
@@ -40,7 +40,7 @@
       <select name="n" id = "{{meal.name}}">
         {% for i in num_list %}
         {% if i == 1 %}
-        <option id="male" selected="selected">{{i}}</option>
+        <option selected="selected">{{i}}</option>
         {% else %}
         <option>{{i}}</option>
         {% endif %}
@@ -72,7 +72,7 @@
 {{err_msg}}
 </h3>
 {% elif cart_list %}
-<div class = "introduce">
+<div class = "control">
   <form action="{% url 'orders:all' %}" method="get">
   <button name="d" type="submit" value="all">clean cart</button>
   </form>
@@ -80,11 +80,16 @@
   <button name="s" type="submit" value="OK">place order</button>
   </form>
   <h3>total price: {{ price }}$</h3>
+</div>
+
+<div class = "introduce">
+
   {% for name, url, id, num, sub_price in cart_list %}
   <div class = "card">
     <h3>{{name}}: {{sub_price}}$</h3>
-    <form action="{% url 'orders:all' %}" method="get">
-    <select name="n">
+    <form action="{% url 'orders:all' %}" class = "changenum" method="get">
+    <label for="{{name}}-select">num: </label>
+    <select name="n" id = "{{name}}-select">
       {% for i in num_list %}
 
         {% if i == num %}
