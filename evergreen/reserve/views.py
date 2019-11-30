@@ -37,20 +37,18 @@ class ReserveListView(LoginRequiredMixin, View) :
                     object_list = Reserve.objects.filter(
                         Q(date__icontains=tm.strftime("%Y-%m-%d")) & Q(hour__icontains=tm.hour)
                     )
-                    tb_dict = {}
-                    for tb in Table.objects.all():
-                        tb_dict[tb] = True
-                    for res in object_list:
-                        tb_dict[res.table] = False
-                    tb_list += list(tb_dict.items())
-                    tm_str = tm.strftime("%Y/%m/%d %H:%M")
+                    object_list = [obj.table for obj in object_list]
+                    for tb in Table.objects.all().order_by('category', 'name'):
+                        print(tb)
+                        tb_list.append((tb, (tb not in object_list)))
+                    tm_str = tm.strftime("%Y/%m/%d-%H:%M")
                 else:
                     err_msg="We open in 11:00~20:00"
             except: 
                 err_msg="Illegal input!"
 
         ctx = {'reserve_list': rl, 'err_msg': err_msg, 'tb_list': tb_list, 
-               'time_list':tl, 'tm':tm_str,};
+               'time_list':tl, 'tm':tm_str};
         return render(request, 'reserves/reserve_list.html', ctx)
 
 class ReserveDetailView(OwnerDetailView):
@@ -65,7 +63,7 @@ class ReserveCreateView(OwnerCreateView):
     def form_valid(self, form):
         print("fv")
         object = form.save(commit=False)
-        dh = datetime.strptime(self.request.GET.get('d'), "%Y/%m/%d %H:%M")
+        dh = datetime.strptime(self.request.GET.get('d'), "%Y/%m/%d-%H:%M")
         object.custom = str(self.request.user)
         object.table = Table.objects.get(id=self.request.GET.get('n'))
         object.date = dh.strftime("%Y-%m-%d")
