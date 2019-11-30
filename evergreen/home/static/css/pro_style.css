@@ -503,9 +503,13 @@ color: red;
   height:88px;
   width: 88px;
 }
+
 .seats .Small{
   height:60px;
   width: 50px;
+}
+.seats button:focus{
+  background-color: black;
 }
 .seats .Middle{
   height:50%;
