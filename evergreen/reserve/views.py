@@ -43,7 +43,7 @@ class ReserveListView(LoginRequiredMixin, View) :
                     for res in object_list:
                         tb_dict[res.table] = False
                     tb_list += list(tb_dict.items())
-                    tm_str = tm.strftime("%Y-%m-%d-%H")
+                    tm_str = tm.strftime("%Y/%m/%d %H:%M")
                 else:
                     err_msg="We open in 11:00~20:00"
             except: 
@@ -65,17 +65,11 @@ class ReserveCreateView(OwnerCreateView):
     def form_valid(self, form):
         print("fv")
         object = form.save(commit=False)
-        dh = datetime.strptime(self.request.GET.get('d'), "%Y-%m-%d-%H")
+        dh = datetime.strptime(self.request.GET.get('d'), "%Y/%m/%d %H:%M")
         object.custom = str(self.request.user)
         object.table = Table.objects.get(id=self.request.GET.get('n'))
         object.date = dh.strftime("%Y-%m-%d")
         object.hour = dh.hour
-        '''
-        if object.person>table.category.max_person:
-            raise forms.ValidationError("Table %s con only contain %d diners"%(table, table.category.max_person))
-        if object.person<table.category.min_person:
-            raise forms.ValidationError("Table %s should have at least %d diners"%(table, table.category.min_person))
-        '''
         return super(ReserveCreateView, self).form_valid(form)
 
     def get_form_kwargs(self):
