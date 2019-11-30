@@ -1,38 +1,45 @@
 {% extends "base_bootstrap.html" %}
-
-{% block hdr %}
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Static Example</title>
-
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-  <!-- XDSoft DateTimePicker -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
-{% endblock %}
-
-
+{% load static %} 
+{% load humanize %} 
 {% block content %}
-<h1>Reserve</h1>
-<p>
-<h2>Your Reservations</h2>
+<header class="general">
+<div class="nav">
+  <nav>
+    <ul>
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'hist' %}">History</a></li>
+      <li><a href="{% url 'orders:all' %}">Order</a></li>
+      <li><a href="{% url 'logout' %}?next={% url 'orders:all' %}">Log out</a></li>
+    </ul>
+  </nav>
+</div>
+
+<div class = "typewriter">
+<h1>Make Reservations Online</h1></div>
+<p>Address: 2771 Plymouth Rd, Ann Arbor, MI 48105(734)-769-2748.
+</br>email: business@evergreen-restaurant.com</p>
+</header>
+<div class = "mainContent" id = "main">
+  <div class = "menu" id = "menu"> 
+
+<h2>Current Reservations</h2>
 {% if reserve_list %}
-<ul>
+<div class = "introduce">
   {% for reserve in reserve_list %}
     {% if reserve.owner == user %}
+    <ul>
     <li>
         {{ reserve.date }} {{ reserve.hour }}:00 @ Table {{reserve.table.category.name}}_{{reserve.table.name}}
         (<a href="{% url 'reserves:reserve_delete' reserve.id %}">Delete</a>)
-        </p>
         {% endif %}
     </li>
+  </ul>
   {% endfor %}
-</ul>
+</div>
 {% else %}
   <p>There are no reserves in the database.</p>
 {% endif %}
+</div>
 
 <form action="{% url 'reserves:all' %}" method="get">
   <input name="d" id="datetimepicker" type="text" autocomplete="off">
@@ -59,14 +66,5 @@
 </form>
 {% endif %}
 
-</p>
-<p>
-{% if user.is_authenticated %}
-<a href="{% url 'logout' %}?next={% url 'reserves:all' %}">Logout</a>
-{% else %}
-<a href="{% url 'login' %}?next={% url 'reserves:all' %}">Login</a>
-{% endif %}
-| <a href="{% url 'index' %}">Home</a>
-| <a href="{% url 'hist' %}">History</a>
-</p>
+</div>
 {% endblock %}
