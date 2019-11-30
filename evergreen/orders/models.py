@@ -8,10 +8,12 @@ class Order(models.Model) :
             max_length=200,
             validators=[MinLengthValidator(2, "Your name must be greater than 2 characters")]
     )
-    owner      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
+    owner        = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    phone        = models.CharField(max_length=12)
+    addr         = models.CharField(max_length=100)
+    created_at   = models.DateTimeField(auto_now_add=True)
     delivered_at = models.DateTimeField(null=True)
-    delivered = models.BooleanField(default=False)
+    delivered    = models.BooleanField(default=False)
     
     def __str__(self):
         return self.custom
