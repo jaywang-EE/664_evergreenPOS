@@ -12,6 +12,7 @@ class Reserve(models.Model) :
     hr_candidates = [(i, "%d:00"%i) for i in range(11,21)]
     hour = models.IntegerField(choices=hr_candidates, verbose_name='Time you\'ll arrive')
     table      = models.ForeignKey('Table', on_delete=models.CASCADE, null=False)
+    phone      = models.CharField(max_length=20)
     person     = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)], 
                                      verbose_name= 'Number of diners')
     owner      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

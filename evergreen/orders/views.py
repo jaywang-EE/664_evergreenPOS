@@ -17,6 +17,9 @@ from reserve.models import Reserve
 
 from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
 
+def itos2(price):
+    return "%.2f"%price
+
 class KitchenView(OwnerListView):
     def get(self, request):
         if not request.user.is_superuser:
@@ -51,7 +54,7 @@ class HistoryView(LoginRequiredMixin, View) :
             for mn in MealNum.objects.filter(order=order):
                 price += mn.meal.price*mn.num
                 order_list[-1][-1].append((mn.meal.name, mn.num))
-            order_list[-1].append(price)
+            order_list[-1].append(itos2(price))
 
         reserve_list = []
         for res in Reserve.objects.filter(owner=self.request.user):
@@ -59,21 +62,6 @@ class HistoryView(LoginRequiredMixin, View) :
 
         ctx = {'err_msg': "", 'order_list': order_list, 'reserve_list':reserve_list, 'username':str(self.request.user)}
         return render(request, 'hist_list.html', ctx)
-
-
-@method_decorator(csrf_exempt, name='dispatch')
-class OrderUpdateView(LoginRequiredMixin, View):
-    def post(self, request, cat, num):
-        print(cat)
-        print(num)
-        fav = Fav(user=request.user, ad=a)
-        response = render(request, 'orders/order_list.html', ctx)
-        response.set_cookie(key=cookie_id, value=num)
-        try:
-            fav.save()  # In case of duplicate key
-        except IntegrityError as e:
-            pass
-        return HttpResponse()
 
 class OrderListView(LoginRequiredMixin, View) :
     def get(self, request):
@@ -109,7 +97,7 @@ class OrderListView(LoginRequiredMixin, View) :
                 cart_list.append((meal.name, meal.image_url, meal.id, int(v), sub_price))
         if not cart_list: err_msg = "Please pick something into cart~"
         else: cart_list.sort()
-        ctx = {'err_msg': err_msg, 'num_list': list(range(1,10)), 'meal_list':ml, 'cart_list': cart_list, 'price':"%.2f"%price}
+        ctx = {'err_msg': err_msg, 'num_list': list(range(1,10)), 'meal_list':ml, 'cart_list': cart_list, 'price':itos2(price)}
         response = render(request, 'orders/order_list.html', ctx)
         if is_delete=="all":
             [response.delete_cookie(k) for k in delete_all_list]
@@ -142,7 +130,7 @@ class OrderCreateView(OwnerCreateView):
                 price += sub_price
                 cart_list.append((meal.name, v, sub_price))
         context['cart_list'] = cart_list
-        context['tot_price'] = price
+        context['tot_price'] = itos2(price)
         return context
 
     def form_valid(self, form):
