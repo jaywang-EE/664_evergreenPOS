@@ -28,7 +28,9 @@ h3{
   text-align:center;
 }
 
-
+h4{
+  margin:1% 1% ;
+}
 p{
   font-size: 1em;
   line-height: 1.5;
@@ -371,6 +373,7 @@ text-align: center;
 .introduce p{
   color: rgba(0,0,0, 0.8);
   margin: 5px;
+  text-align: justify;
 }
 
 .introduce ul{
@@ -445,13 +448,28 @@ text-align: center;
 }
 .login li{
 margin: 2% 0;
+color: blue;
 }
+.login .errorlist li{
+color: red;
 
+} 
+.login span{
+  color: blue;
+  padding-bottom: 16px;
+
+}
 .login p{
   text-align: left;
   margin: 0;
 }
-
+#seats{
+  text-align: center;
+}
+#seats img{
+  height: 500px;
+  max-width: 100%;
+}
 input, textarea {
   width: 100%;
   padding: 12px;
@@ -473,7 +491,7 @@ input[type=submit] {
   font-size:1em;
   width: 30%;
   display: block;
-  margin: 0 auto;
+  margin: 10px auto;
 }
 input[type=submit]:hover{
   filter: drop-shadow(4px 4px 4px black);
@@ -482,7 +500,9 @@ input[type=submit]:focus{
   filter: drop-shadow(4px 4px 4px black);
 }
 
-
+.err_msg{
+  color: red;
+}
 @media screen and (min-width: 800px){
   h1{
   font-size: 3.2em;
