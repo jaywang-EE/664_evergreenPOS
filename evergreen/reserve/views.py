@@ -40,8 +40,11 @@ class ReserveListView(LoginRequiredMixin, View) :
                         tb_dict[tb] = True
                     for res in object_list:
                         tb_dict[res.table] = False
+                    tb_list += list(tb_dict.items())
+                    '''
                     for tb, val in tb_dict.items():
-                        tb_list.append(("%s_%s"%(tb.category.name, tb.name), tb.id, val))
+                        tb_list.append((tb, val))
+                    '''
                     tm_str = tm.strftime("%Y-%m-%d-%H")
                 else:
                     err_msg="We open in 11:00~20:00"

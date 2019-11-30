@@ -25,16 +25,17 @@
   <h2>Your Cart</h2>
   <div class = "introduce">
 
-    {% for name, num in cart_list %}
+    {% for name, num, price in cart_list %}
     <div class = "card">
 
     <ul>
       <li>
-      {{name}}: {{num}}
+      {{name}}: {{num}} ${{price}}
       </li>
     </ul>
     </div>
     {% endfor %}
+    tot price: {{tot_price}}
   </div>
   <h2>Your Information</h2>
 
