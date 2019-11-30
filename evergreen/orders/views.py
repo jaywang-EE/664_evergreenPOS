@@ -134,10 +134,15 @@ class OrderCreateView(OwnerCreateView):
         print(**kwargs)
         context = super(OrderCreateView, self).get_context_data(**kwargs)
         cart_list = []
+        price = 0.
         for k, v in self.request.COOKIES.items():
             if "meal_id_" in k:
-                cart_list.append((Meal.objects.get(id=int(k[8:])).name,v))
+                meal = Meal.objects.get(id=int(k[8:]));
+                sub_price = meal.price*int(v)
+                price += sub_price
+                cart_list.append((meal.name, v, sub_price))
         context['cart_list'] = cart_list
+        context['tot_price'] = price
         return context
 
     def form_valid(self, form):

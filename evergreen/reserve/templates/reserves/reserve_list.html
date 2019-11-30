@@ -60,9 +60,9 @@
 </div>
 <form action="{% url 'reserves:reserve_create' %}" method="get">
 <input type="hidden" name="d" value={{tm}} />
-{% for tb, id, val in tb_list %}
+{% for tb, val in tb_list %}
 
-{{tb}}: {% if val %}<button name="n" type="submit" class="{{tb.category}}" id = "{{tb}}" value={{id}}>Book  {{tb}}</button>{%else%}booked{%endif%}
+{{tb.category}} {{tb.name}}: {% if val %}<button name="n" type="submit" class="{{tb.category}}" id = "{{tb.category}}_{{tb.name}}" value={{tb.id}}>Book  {{tb.category}} {{tb.name}}</button>{%else%}booked{%endif%}
 
 {% endfor %}
 </form>
