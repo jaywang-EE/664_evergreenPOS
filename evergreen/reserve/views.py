@@ -17,7 +17,8 @@ from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateV
 
 class ReserveListView(LoginRequiredMixin, View) :
     def get(self, request):
-        rl = Reserve.objects.all();
+        now = timezone.now()
+        rl = Reserve.objects.filter(date__gte=now).filter(owner=self.request.user).order_by('date', 'hour');
         tl = [i for i in range(11, 21)]
         tm = request.GET.get('d')
         table_name = request.GET.get('n')
@@ -26,7 +27,6 @@ class ReserveListView(LoginRequiredMixin, View) :
         tm_str = ""
         if tm:
             timezone.activate(pytz.timezone('US/Michigan'))
-            now = timezone.now()
             tm = timezone.make_aware(datetime.strptime(tm, "%Y/%m/%d %H:%M"))
             try:
                 if tm<=now:
@@ -41,16 +41,12 @@ class ReserveListView(LoginRequiredMixin, View) :
                     for res in object_list:
                         tb_dict[res.table] = False
                     tb_list += list(tb_dict.items())
-                    '''
-                    for tb, val in tb_dict.items():
-                        tb_list.append((tb, val))
-                    '''
                     tm_str = tm.strftime("%Y-%m-%d-%H")
                 else:
                     err_msg="We open in 11:00~20:00"
             except: 
                 err_msg="Illegal input!"
-        else: err_msg = "Select your prefered time."
+        else: err_msg = "abc"
 
         ctx = {'reserve_list': rl, 'err_msg': err_msg, 'tb_list': tb_list, 
                'time_list':tl, 'tm':tm_str,};

@@ -27,4 +27,4 @@ class CreateForm(forms.ModelForm):
 
     class Meta:
         model = Reserve
-        fields = ['custom', 'person']
+        fields = ['custom', 'person', 'phone']
