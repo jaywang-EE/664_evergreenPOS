@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CreateForm
 from django import forms
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from django.utils import timezone
 import pytz
 
@@ -31,6 +31,8 @@ class ReserveListView(LoginRequiredMixin, View) :
             try:
                 if tm<=now:
                     err_msg="No past time!"
+                elif tm > (now+timedelta(days=7)):
+                    err_msg="We only accept booking in 1 week!"
                 elif 10<tm.hour<21:
                     object_list = Reserve.objects.filter(
                         Q(date__icontains=tm.strftime("%Y-%m-%d")) & Q(hour__icontains=tm.hour)
@@ -46,7 +48,6 @@ class ReserveListView(LoginRequiredMixin, View) :
                     err_msg="We open in 11:00~20:00"
             except: 
                 err_msg="Illegal input!"
-        else: err_msg = "abc"
 
         ctx = {'reserve_list': rl, 'err_msg': err_msg, 'tb_list': tb_list, 
                'time_list':tl, 'tm':tm_str,};
