@@ -463,12 +463,31 @@ color: red;
   text-align: left;
   margin: 0;
 }
-#seats{
+#seats_plan{
   text-align: center;
+  margin: auto auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 25% 25% 25% 25%;
+
 }
-#seats img{
-  height: 500px;
+#seats_plan #background{
+  max-height: 500px;
   max-width: 100%;
+  grid-column: 1/-1;
+  grid-row: 1/-1; 
+
+}
+.seats img{
+  height:88px;
+  max-width: 100%;
+}
+
+#Large_1{
+  grid-column: 1/span 1; 
+  grid-row: 1/span 1; 
+
 }
 input, textarea {
   width: 100%;

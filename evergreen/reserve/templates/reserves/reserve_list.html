@@ -55,17 +55,47 @@
 </p>
 {% else %}
 <h4>Avalible Tables:</h4>
-<div id = "seats">
-<img src="{% static 'images/table/restaurant-seating-plan-noseats.png' %}" alt="background"/>
-</div>
+<div id = "seats_plan">
+<img id = "background" src="{% static 'images/table/restaurant-seating-plan-noseats.png' %}" alt="background"/>
 <form action="{% url 'reserves:reserve_create' %}" method="get">
 <input type="hidden" name="d" value={{tm}} />
+<div class = "seats">
 {% for tb, val in tb_list %}
+<button name="n" type="submit" class="{{tb.category}}" id = "{{tb.category}}_{{tb.name}}" value={{tb.id}}></button>
+<script type="text/javascript">
+  var image = document.createElement("img");
+  var button = document.querySelector("#{{tb.category}}_{{tb.name}}");
+  if ($("#{{tb.category}}_{{tb.name}}").attr("class") == "Small"){
+    {% if val %}
+    image.src = "{% static 'images/table/smalltable_free.png' %}";
+    {%else%}
+    image.src = "{% static 'images/table/smalltable_ocu.png' %}";
+    {%endif%}
 
-{{tb.category}} {{tb.name}}: {% if val %}<button name="n" type="submit" class="{{tb.category}}" id = "{{tb.category}}_{{tb.name}}" value={{tb.id}}>Book  {{tb.category}} {{tb.name}}</button>{%else%}booked{%endif%}
+    image.alt = "small table"
+    button.appendChild(image)
+  }
+  else if ($("#{{tb.category}}_{{tb.name}}").attr("class") == "Large"){
+    {% if val %}
+    image.src = "{% static 'images/table/bigtable_free.png' %}";
+    {%else%}
+    image.src = "{% static 'images/table/bigtable_ocu.png' %}";
+    {%endif%}
+    image.alt = "large table"
+    button.appendChild(image)
+  }
+  console.log(button)
+  console.log($("#{{tb.category}}_{{tb.name}}").attr("class"))
 
+</script>
 {% endfor %}
+</div>
 </form>
+</div>
+<script type="text/javascript">
+  $("#seats_plan").css("height",$("#background").css("height")) 
+  $("#seats_plan").css("width", $("#background").css("width")) 
+</script>
 {% endif %}
 </div>
 
