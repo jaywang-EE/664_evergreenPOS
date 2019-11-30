@@ -20,8 +20,7 @@
 </br>email: business@evergreen-restaurant.com</p>
 </header>
 <div class = "mainContent" id = "main">
-  <div class = "menu" id = "menu"> 
-
+<div class = "menu" id = "menu"> 
 <h2>Current Reservations</h2>
 {% if reserve_list %}
 <div class = "introduce">
@@ -31,9 +30,9 @@
     <li>
         {{ reserve.date }} {{ reserve.hour }}:00 @ Table {{reserve.table.category.name}}_{{reserve.table.name}}
         (<a href="{% url 'reserves:reserve_delete' reserve.id %}">Delete</a>)
-        {% endif %}
     </li>
-  </ul>
+    </ul>
+    {% endif %}
   {% endfor %}
 </div>
 {% else %}
