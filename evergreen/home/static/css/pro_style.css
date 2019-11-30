@@ -28,7 +28,9 @@ h3{
   text-align:center;
 }
 
-
+h4{
+  margin:1% 1% ;
+}
 p{
   font-size: 1em;
   line-height: 1.5;
@@ -461,7 +463,13 @@ color: red;
   text-align: left;
   margin: 0;
 }
-
+#seats{
+  text-align: center;
+}
+#seats img{
+  height: 500px;
+  max-width: 100%;
+}
 input, textarea {
   width: 100%;
   padding: 12px;
@@ -492,7 +500,9 @@ input[type=submit]:focus{
   filter: drop-shadow(4px 4px 4px black);
 }
 
-
+.err_msg{
+  color: red;
+}
 @media screen and (min-width: 800px){
   h1{
   font-size: 3.2em;

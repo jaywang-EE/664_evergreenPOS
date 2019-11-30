@@ -38,8 +38,8 @@
 {% else %}
   <p>There are no reserves in the database.</p>
 {% endif %}
-</div>
-
+<h2>New Reservations</h2>
+<h4>Please select your prefered time (12:00 - 21:00).</h4>
 <form action="{% url 'reserves:all' %}" method="get">
   <input name="d" id="datetimepicker" type="text" autocomplete="off">
   <script>
@@ -49,21 +49,25 @@
   </script>
   <input type="submit" value="Submit">
 </form>
-<p>
 {% if err_msg %}
+<p class = "err_msg">
 {{err_msg}}
+</p>
 {% else %}
-<b>Avalible Tables</b>
-<p>
+<h4>Avalible Tables:</h4>
+<div id = "seats">
+<img src="{% static 'images/table/restaurant-seating-plan-noseats.png' %}" alt="background"/>
+</div>
 <form action="{% url 'reserves:reserve_create' %}" method="get">
 <input type="hidden" name="d" value={{tm}} />
 {% for tb, id, val in tb_list %}
-<p>
-{{tb}}: {% if val %}<button name="n" type="submit" value={{id}}>Book {{tb}}</button>{%else%}booked{%endif%}
-<p>
+
+{{tb}}: {% if val %}<button name="n" type="submit" class="{{tb.category}}" id = "{{tb}}" value={{id}}>Book  {{tb}}</button>{%else%}booked{%endif%}
+
 {% endfor %}
 </form>
 {% endif %}
+</div>
 
 </div>
 {% endblock %}
