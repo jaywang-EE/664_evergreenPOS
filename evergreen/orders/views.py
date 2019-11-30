@@ -60,21 +60,6 @@ class HistoryView(LoginRequiredMixin, View) :
         ctx = {'err_msg': "", 'order_list': order_list, 'reserve_list':reserve_list, 'username':str(self.request.user)}
         return render(request, 'hist_list.html', ctx)
 
-
-@method_decorator(csrf_exempt, name='dispatch')
-class OrderUpdateView(LoginRequiredMixin, View):
-    def post(self, request, cat, num):
-        print(cat)
-        print(num)
-        fav = Fav(user=request.user, ad=a)
-        response = render(request, 'orders/order_list.html', ctx)
-        response.set_cookie(key=cookie_id, value=num)
-        try:
-            fav.save()  # In case of duplicate key
-        except IntegrityError as e:
-            pass
-        return HttpResponse()
-
 class OrderListView(LoginRequiredMixin, View) :
     def get(self, request):
         ml = Meal.objects.all();
