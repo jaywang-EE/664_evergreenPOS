@@ -25,12 +25,14 @@
 {% if reserve_list %}
 <div class = "introduce">
   {% for reserve in reserve_list %}
-  <ul>
-  <li>
-      {{ reserve.date }} {{ reserve.hour }}:00 @ Table {{reserve.table.category.name}}_{{reserve.table.name}}
-      (<a href="{% url 'reserves:reserve_delete' reserve.id %}">Delete</a>)
-  </li>
-  </ul>
+    {% if reserve.owner == user %}
+    <ul>
+    <li>
+        {{ reserve.date }} {{ reserve.hour }}:00 @ Table {{reserve.table.category.name}}_{{reserve.table.name}}
+        (<a href="{% url 'reserves:reserve_delete' reserve.id %}">Delete</a>)
+    </li>
+    </ul>
+    {% endif %}
   {% endfor %}
 </div>
 {% else %}
@@ -52,35 +54,43 @@
 {{err_msg}}
 </p>
 {% elif tb_list %}
+<p>{{tm}}</p>
+
 <h4>Avalible Tables:</h4>
-<div id = "seats_plan">
-<img id = "background" src="{% static 'images/table/restaurant-seating-plan-noseats.png' %}" alt="background"/>
 <form action="{% url 'reserves:reserve_create' %}" method="get">
 <input type="hidden" name="d" value={{tm}} />
+<div id = "seats_plan">
 <div class = "seats">
+<img id = "background" src="{% static 'images/table/seats-background.png' %}" alt="background"/>
+
 {% for tb, val in tb_list %}
-<button name="n" type="submit" class="{{tb.category}}" id = "{{tb.category}}_{{tb.name}}" value={{tb.id}}></button>
+  {% if val %}
+  <button name="n" type="submit" class="{{tb.category}}" id = "{{tb.category}}_{{tb.name}}" value={{tb.id}}>book</button>
+  {%else%}
+  <button name="n" type="submit" class="{{tb.category}}" id = "{{tb.category}}_{{tb.name}}" value={{tb.id}}></button>
+  {%endif%}
 <script type="text/javascript">
-  var image = document.createElement("img");
   var button = document.querySelector("#{{tb.category}}_{{tb.name}}");
   if ($("#{{tb.category}}_{{tb.name}}").attr("class") == "Small"){
     {% if val %}
-    image.src = "{% static 'images/table/smalltable_free.png' %}";
+    $("#{{tb.category}}_{{tb.name}}").css("background-image", "url('/static/images/table/smalltable_free.png')");
     {%else%}
-    image.src = "{% static 'images/table/smalltable_ocu.png' %}";
+    $("#{{tb.category}}_{{tb.name}}").css("background-image", 'url("/static/images/table/smalltable_ocu.png")')
     {%endif%}
-
-    image.alt = "small table"
-    button.appendChild(image)
   }
   else if ($("#{{tb.category}}_{{tb.name}}").attr("class") == "Large"){
     {% if val %}
-    image.src = "{% static 'images/table/bigtable_free.png' %}";
+    $("#{{tb.category}}_{{tb.name}}").css("background-image", "url('/static/images/table/bigtable_free.png')");
     {%else%}
-    image.src = "{% static 'images/table/bigtable_ocu.png' %}";
+    $("#{{tb.category}}_{{tb.name}}").css("background-image", 'url("/static/images/table/bigtable_ocu.png")');
     {%endif%}
-    image.alt = "large table"
-    button.appendChild(image)
+  }
+  else if ($("#{{tb.category}}_{{tb.name}}").attr("class") == "Middle"){
+    {% if val %}
+    $("#{{tb.category}}_{{tb.name}}").css("background-image", "url('/static/images/table/midtable_free.png')");
+    {%else%}
+    $("#{{tb.category}}_{{tb.name}}").css("background-image", 'url("/static/images/table/midtable_ocu.png")');
+    {%endif%}
   }
   console.log(button)
   console.log($("#{{tb.category}}_{{tb.name}}").attr("class"))
@@ -88,11 +98,14 @@
 </script>
 {% endfor %}
 </div>
-</form>
 </div>
+
+</form>
 <script type="text/javascript">
   $("#seats_plan").css("height",$("#background").css("height")) 
-  $("#seats_plan").css("width", $("#background").css("width")) 
+  $("#seats_plan").css("width", $("#background").css("width"))
+  $(".seats").css("height",$("#background").css("height")) 
+  $(".seats").css("width", $("#background").css("width"))  
 </script>
 {% endif %}
 </div>
