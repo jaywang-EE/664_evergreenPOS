@@ -35,11 +35,14 @@
     </ul>
     </div>
     {% endfor %}
-    tot price: {{tot_price}}
+
+  </div>
+  <div class = "total-price">
+    <h3>total price: {{tot_price}}$</h3>
   </div>
   <h2>Your Information</h2>
 
-  <form action="" method="post">
+  <form class = "login" id = "orderconfirm" action="" method="post">
     {% csrf_token %}
     {{ form|crispy }}
     <input type="submit" value="Submit">
