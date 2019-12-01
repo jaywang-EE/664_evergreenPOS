@@ -55,9 +55,11 @@
 {{err_msg}}
 </p>
 {% elif tb_list %}
-<p>{{tm}}</p>
 
-<h4>Avalible Tables:</h4>
+
+<h3>Avalible Tables for {{tm}}:</h3>
+<h4>Please select your prefered table.</h4>
+<p class="ps">Ps: Red tables have been occupied.</p>
 <form id = "reserve" action="{% url 'reserves:reserve_create' %}" method="get">
 <input type="hidden" name="d" value={{tm}} />
 <div id = "seats_plan">

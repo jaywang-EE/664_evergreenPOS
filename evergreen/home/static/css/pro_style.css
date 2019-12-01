@@ -38,6 +38,7 @@ h3{
 }
 
 h4{
+  font-size: 1.2em;
   margin:3% 2% ;
   text-align:center;
 
@@ -46,6 +47,9 @@ p{
   font-size: 1em;
   line-height: 1.5;
   text-align: center;
+}
+.ps{
+  color: red;
 }
 strong{
   color: #fff8ca;
@@ -745,7 +749,7 @@ input[type=submit]:focus{
   }
 
   .login{
-    margin:6% 30%;
+    margin:3% 30%;
 
   }
   #choosetime{
