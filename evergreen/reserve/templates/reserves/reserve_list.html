@@ -10,7 +10,7 @@
       <li><a href="{% url 'index' %}">Home</a></li>
       <li><a href="{% url 'hist' %}">History</a></li>
       <li><a href="{% url 'orders:all' %}">Order</a></li>
-      <li><a href="{% url 'logout' %}?next={% url 'orders:all' %}">Log out</a></li>
+      <li><a href="{% url 'logout' %}?next={% url 'reserves:all' %}">Log out</a></li>
     </ul>
   </nav>
 </div>
@@ -42,6 +42,7 @@
 <h2>New Reservations</h2>
 <h4>Please select your prefered time (12:00 - 21:00) for the future 1 week.</h4>
 <form class = "login" id = "choosetime" action="{% url 'reserves:all' %}" method="get">
+  <label for="datetimepicke">Time: </label>
   <input name="d" id="datetimepicker" type="text" autocomplete="off">
   <script>
     $(function () {

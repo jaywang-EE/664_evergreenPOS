@@ -398,7 +398,10 @@ text-align: center;
   padding: 5px;
   margin-left: 15px;
   list-style-type: square;
-  text-align: justify;
+/*  text-align: justify;
+*/
+  text-align: center;
+  color: #40658f;
 }
 
 .orderContent{
