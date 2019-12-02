@@ -54,11 +54,11 @@ class ReserveCreateView(OwnerCreateView):
     form_class = CreateForm
     template_name = "reserves/reserve_form.html"
 
-    def get(self, request):
-        print("getting")
-        request_rendered = super(ReserveCreateView, self).get(request)
-        print((request_rendered))
-        return request_rendered
+    def get_context_data(self, **kwargs):
+        ctx = super(ReserveCreateView, self).get_context_data(**kwargs)
+        ctx['date'], ctx['hour'] = self.request.GET.get('d').split('-')
+        ctx['table_type'] = str(Table.objects.get(id=self.request.GET.get('n')).category)
+        return ctx
 
     def form_valid(self, form):
         print("fv")
@@ -73,13 +73,11 @@ class ReserveCreateView(OwnerCreateView):
     def get_form_kwargs(self):
         kwargs = super( ReserveCreateView, self).get_form_kwargs()
         # update the kwargs for the form init method with yours
-        print((kwargs))
         kwargs.update(self.kwargs)  # self.kwargs contains all url conf params
         return kwargs
 
     def get_initial(self):
         initial = super(ReserveCreateView, self).get_initial()
-
         initial['table'] = Table.objects.get(id=self.request.GET.get('n'))
 
         return initial
