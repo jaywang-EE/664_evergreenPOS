@@ -22,7 +22,7 @@ def itos2(price):
 
 class KitchenView(OwnerListView):
     def get(self, request):
-        if not request.user.is_superuser:
+        if request.user.groups.filter(name="staff").count()==0:
             raise Http404("No MyModel matches the given query.")
         timezone.activate(pytz.timezone('US/Michigan'))
         confirm_id = request.GET.get('c')
@@ -50,7 +50,7 @@ class HistoryView(LoginRequiredMixin, View) :
         timezone.activate(pytz.timezone('US/Michigan'))
         for order in Order.objects.filter(owner=self.request.user):
             price = 0
-            order_list.append([timezone.localtime(order.created_at).strftime("%Y-%m-%d %H:%M"), order.delivered, order.delivered_at, []])
+            order_list.append([order, timezone.localtime(order.created_at).strftime("%Y-%m-%d %H:%M"), []])
             for mn in MealNum.objects.filter(order=order):
                 price += mn.meal.price*mn.num
                 order_list[-1][-1].append((mn.meal.name, mn.num))

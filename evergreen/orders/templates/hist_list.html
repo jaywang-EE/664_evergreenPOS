@@ -29,10 +29,11 @@
 <h2>Order History</h2>
 {% if order_list %}
 <div class = "introduce">
-  {% for tm, de, dt, ml, pr in order_list %}
+  {% for odr, tm, ml, pr in order_list %}
     <div class = "card">
     <p>
-    {{tm}} : ${{pr}} {% if de %}delivered @ {{dt}}{% else %}prepairing...{% endif %}</p>
+    {{tm}} : ${{pr}} {% if odr.delivered %}delivered @ {{odr.delivered_at}}{% else %}prepairing...{% endif %}
+    </p>
     <ul>
       {% for m, n in ml %}
       <li>

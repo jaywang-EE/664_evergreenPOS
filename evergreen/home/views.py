@@ -27,7 +27,8 @@ class HomeView(View):
         islocal = host.find('localhost') >= 0 or host.find('127.0.0.1') >= 0
         context = {
             'installed' : settings.INSTALLED_APPS,
-            'islocal' : islocal
+            'islocal'   : islocal,
+            'is_staff'  : (request.user.groups.filter(name="staff").count()>0)
         }
         return render(request, 'home/index.html', context)
 

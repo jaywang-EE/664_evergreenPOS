@@ -20,8 +20,7 @@
 <p>Address: 2771 Plymouth Rd, Ann Arbor, MI 48105(734)-769-2748.
 </br>email: business@evergreen-restaurant.com</p>
 </header>
-<h3>Are you sure you want to delete the reserve: {{ reserve }}?</h3>
-
+<h3>Are you sure you want to delete the reserve: {{ reserve.table.category }} {{ reserve.table.name }} @ {{ reserve.date }} {{ reserve.hour }}?</h3>
 <form action="" method="POST">
   {% csrf_token %}
   <input type="submit" value="Yes, delete.">
