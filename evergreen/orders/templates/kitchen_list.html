@@ -1,43 +1,54 @@
 {% extends "base_bootstrap.html" %}
 {% load static %} 
-
-{% block hdr %}
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Static Example</title>
-
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-  <!-- XDSoft DateTimePicker -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
-{% endblock %}
-
-
+{% load humanize %} 
 {% block content %}
-<h1>Manage</h1>
-<p>
+<header class="general">
+<div class="nav">
+  <nav>
+    <ul>
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'hist' %}">History</a></li>
+      <li><a href="{% url 'reserves:all' %}">Reservation</a></li>
+      <li><a href="{% url 'orders:all' %}">Order</a></li>
+      <li><a href="{% url 'logout' %}?next={% url 'index' %}">Log out</a></li>
+    </ul>
+  </nav>
+</div>
+
+<div class = "typewriter">
+<h1>Order Management</h1></div>
+<p>Address: 2771 Plymouth Rd, Ann Arbor, MI 48105(734)-769-2748.
+</br>email: business@evergreen-restaurant.com</p>
+</header>
+
+<div class = "mainContent" id = "main">
+  <div class = "menu" id = "menu">
+<h2>Order List</h2>
 {% if order_list %}
-<ul>
+<div class = "introduce">
+
   {% for name, time, id, meal_list in order_list %}
-    <li>
-    {{name}} {{time}} 
-    <form action="{% url 'manage' %}" method="get">
-    <button name="c" type="submit" value={{id}}>deliver</button>
-    </form>
-    </li>
-    
+    <div class = "card">
+    <h3>Meal list</h3>
+    <h4>User: {{name}} Time: {{time}} </h4>
+
+    <ul>
     {% for meal, num in meal_list %}
       <li>
       {{ meal }}: {{ num }}
       </li>
     
     {% endfor %}
+    </ul>
+    <form action="{% url 'manage' %}" method="get">
+    <button name="c" type="submit" value={{id}}>deliver</button>
+    </form>
+  </div>
   {% endfor %}
-</ul>
+</div>
+{% else %}
+<h3>There are no orders in the database.</h3>
 {% endif %}
-
-<a href="{% url 'index' %}">Home</a>
-</p>
+</div>
+</div>
 {% endblock %}
