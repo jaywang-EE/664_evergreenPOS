@@ -22,7 +22,7 @@ def itos2(price):
 
 class KitchenView(OwnerListView):
     def get(self, request):
-        if not request.user.is_superuser:
+        if request.user.groups.filter(name="staff").count()==0:
             raise Http404("No MyModel matches the given query.")
         timezone.activate(pytz.timezone('US/Michigan'))
         confirm_id = request.GET.get('c')
