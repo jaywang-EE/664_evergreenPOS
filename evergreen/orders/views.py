@@ -50,7 +50,7 @@ class HistoryView(LoginRequiredMixin, View) :
         timezone.activate(pytz.timezone('US/Michigan'))
         for order in Order.objects.filter(owner=self.request.user):
             price = 0
-            order_list.append([timezone.localtime(order.created_at).strftime("%Y-%m-%d %H:%M"), order.delivered, order.delivered_at, []])
+            order_list.append([order, timezone.localtime(order.created_at).strftime("%Y-%m-%d %H:%M"), []])
             for mn in MealNum.objects.filter(order=order):
                 price += mn.meal.price*mn.num
                 order_list[-1][-1].append((mn.meal.name, mn.num))

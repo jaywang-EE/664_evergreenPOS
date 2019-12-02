@@ -11,9 +11,7 @@ from datetime import date, datetime, timedelta
 from django.utils import timezone
 import pytz
 
-
 from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
-
 
 class ReserveListView(LoginRequiredMixin, View) :
     def get(self, request):
@@ -51,14 +49,16 @@ class ReserveListView(LoginRequiredMixin, View) :
                'time_list':tl, 'tm':tm_str};
         return render(request, 'reserves/reserve_list.html', ctx)
 
-class ReserveDetailView(OwnerDetailView):
-    model = Reserve
-    template_name = "reserves/reserve_detail.html"
-
 class ReserveCreateView(OwnerCreateView):
     model = Reserve
     form_class = CreateForm
     template_name = "reserves/reserve_form.html"
+
+    def get(self, request):
+        print("getting")
+        request_rendered = super(ReserveCreateView, self).get(request)
+        print((request_rendered))
+        return request_rendered
 
     def form_valid(self, form):
         print("fv")
@@ -84,12 +84,6 @@ class ReserveCreateView(OwnerCreateView):
 
         return initial
 
-class ReserveUpdateView(OwnerUpdateView):
-    model = Reserve
-    fields = ['custom', 'date', 'hour']
-    template_name = "reserves/reserve_form.html"
-
 class ReserveDeleteView(OwnerDeleteView):
     model = Reserve
     template_name = "reserves/reserve_delete.html"
-
