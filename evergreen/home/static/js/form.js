@@ -5,7 +5,6 @@ $(".changenum").submit(function(event) {
   var button = element.querySelector("button").value; 
   document.cookie = "meal_id_"+button+"="+select+";path=/";
   var selectPrice = document.querySelectorAll("#cart h3")
-  console.log(selectPrice[1].innerHTML)
   var selectvalue = document.querySelectorAll("#cart select")
   var i;
   var totalprice = 0;
