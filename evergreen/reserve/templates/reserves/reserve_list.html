@@ -29,7 +29,7 @@
     {% if reserve.owner == user %}
     <ul>
     <li>
-        {{ reserve.date }} {{ reserve.hour }}:00 @ Table {{reserve.table.category.name}}_{{reserve.table.name}}
+        {{ reserve }}
         (<a href="{% url 'reserves:reserve_delete' reserve.id %}">Delete</a>)
     </li>
     </ul>
@@ -46,7 +46,7 @@
   <input name="d" id="datetimepicker" type="text" autocomplete="off">
   <script>
     $(function () {
-      $("#datetimepicker").datetimepicker();
+      $("#datetimepicker").datetimepicker({format:'Y/m/d-H:00',});
     });
   </script>
   <input type="submit" value="Submit">
