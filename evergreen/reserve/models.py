@@ -1,16 +1,17 @@
 from django.db import models
 from django.core.validators import MinLengthValidator,MaxValueValidator,MinValueValidator
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.conf import settings
+
+from evergreen.timezone import ttos
 
 class Reserve(models.Model) :
     custom = models.CharField(
             max_length=200,
             validators=[MinLengthValidator(2, "Your name must be greater than 2 characters")]
     )
-    date = models.DateField()
-    hr_candidates = [(i, "%d:00"%i) for i in range(11,21)]
-    hour = models.IntegerField(choices=hr_candidates, verbose_name='Time you\'ll arrive')
+    time       = models.DateTimeField()
     table      = models.ForeignKey('Table', on_delete=models.CASCADE, null=False)
     phone      = models.CharField(max_length=20)
     person     = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)], 
@@ -21,21 +22,29 @@ class Reserve(models.Model) :
 
     # Shows up in the admin list
     def __str__(self):
-        return self.custom
+        return "Table %s @ %s"%(self.table, ttos(self.time))
 
 class TableType(models.Model):
     name = models.CharField(max_length=200)
     min_person = models.IntegerField()
     max_person = models.IntegerField()
     
-    def __str__(self):
-        return self.name
+    def range(self): return "%d~%d"%(self.min_person, self.max_person)
+    def valid(self, num): 
+        if num > self.max_person:
+            return "%s table can only contain %d diners"%(self.name, self.max_person)
+        elif num < self.min_person: 
+            return "%s table should have at least %d diners"%(self.name, self.min_person)
+        else: return ""
+
+    def __str__(self): return self.name
 
 class Table(models.Model):
     name = models.CharField(max_length=200)
     category = models.ForeignKey('TableType', on_delete=models.CASCADE, null=False)
 
+    def valid(self, num): return self.category.valid(num)
+    # Shows up in frontEnd
+    def show(self): return "%s %s"%(self.category.name, self.name)
     # Shows up in the admin list
-    def __str__(self):
-        return "%s %s (contain %d~%d diners)"%(self.category.name, self.name, 
-            self.category.min_person, self.category.max_person)
+    def __str__(self): return self.show()#"%s (contain %s diners)"%(self.show(), self.category.range())

@@ -27,21 +27,20 @@
 {% if order_list %}
 <div class = "introduce">
 
-  {% for name, time, id, meal_list in order_list %}
+  {% for order, meal_list, pr in order_list %}
     <div class = "card">
     <h3>Meal list</h3>
-    <h4>User: {{name}} Time: {{time}} </h4>
-
+    <h4>User: {{order.owner}} Time: {{order.created_at}} </h4>
     <ul>
-    {% for meal, num in meal_list %}
+    {% for mn in meal_list %}
       <li>
-      {{ meal }}: {{ num }}
+      {{ mn.meal }}: {{ mn.num }}
       </li>
     
     {% endfor %}
     </ul>
     <form action="{% url 'manage' %}" method="get">
-    <button name="c" type="submit" value={{id}}>deliver</button>
+    <button name="c" type="submit" value={{order.id}}>deliver</button>
     </form>
   </div>
   {% endfor %}

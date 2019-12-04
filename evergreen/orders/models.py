@@ -22,6 +22,10 @@ class MealNum(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE, null=False)
     meal  = models.ForeignKey('Meal', on_delete=models.CASCADE, null=False)
     num   = models.IntegerField()
+
+    def __radd__(self, y): # sum
+        return y + self.num*self.meal.price
+
     def __str__(self):
         return "%s: %d"%(self.meal, self.num)
 

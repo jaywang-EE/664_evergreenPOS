@@ -29,15 +29,15 @@
 <h2>Order History</h2>
 {% if order_list %}
 <div class = "introduce">
-  {% for odr, tm, ml, pr in order_list %}
+  {% for order, ml, pr in order_list %}
     <div class = "card">
     <p>
-    {{tm}} : ${{pr}} {% if odr.delivered %}delivered @ {{odr.delivered_at}}{% else %}prepairing...{% endif %}
+    {{order.create_at}} : ${{pr}} {% if order.delivered %}delivered @ {{order.delivered_at}}{% else %}prepairing...{% endif %}
     </p>
     <ul>
-      {% for m, n in ml %}
+      {% for mn in ml %}
       <li>
-      {{m}}: {{n}}
+      {{ mn.meal }}: {{ mn.num }}
       </li>
       {% endfor %}
     </ul>
@@ -51,17 +51,17 @@ No order
 <h2>Reservations History</h2>
 {% if reserve_list %}
 <div class = "introduce">
-  {% for d, h, t in reserve_list %}
+  {% for reserve in reserve_list %}
     <div class = "card">
     <ul>
     <li>
-    {{d}} {{h}}:00 {{t}} </li>
+    {{reserve.time}} {{reserve.table}} </li>
     </div>
   </ul>
   {% endfor %}
 </div>
 {%else%}
-No order
+No Reservation
 {% endif %}
 </div>
 </div>
