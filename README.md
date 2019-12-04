@@ -10,14 +10,14 @@ Our structure will be:
 
 ```
 Homepage
-├── Menu(Done)
+├── Menu
 ├── Order
 |   ├── Shopping Cart
 |   ├── Order-checking board (For kitchen)
 |   └── Delivery tracking
-└── Reservation(Done)
-    ├── Reservation(Done)
-    └── Current status of seats(Done)
+└── Reservation
+    ├── Reservation
+    └── Current status of seats
 
 ```
 ## Home Page and Login Page
