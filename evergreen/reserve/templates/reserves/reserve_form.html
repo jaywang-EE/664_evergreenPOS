@@ -21,14 +21,15 @@
 </br>email: business@evergreen-restaurant.com</p>
 </header>
 
-<p>Date : {{date}}</p>>
-<p>Time : {{hour}}</p>>
-<p>Table Type : {{table_type}}</p>>
-
-
 <div class = "mainContent" id = "main">
   <div class = "menu" id = "menu">
-    <h3>Please input your information.</h3>
+    <h2>Your Reservation</h2>
+    <p>Date : {{date}}</p>
+    <p>Time : {{hour}}</p>
+    <p>Table Type : {{table_type}}</p>
+  </div>
+    <div class = "menu" id = "menu">
+    <h2>Your Information</h2>
     <form class="login" action="" method="post">
       {% csrf_token %}
       {{ form|crispy }}
