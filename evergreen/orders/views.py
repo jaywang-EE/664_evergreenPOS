@@ -12,7 +12,7 @@ from reserve.models import Reserve
 
 from home.owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerDeleteView
 
-from evergreen.timezone import ttos, stot
+from evergreen.timezone import get_now
 
 
 def itos2(price):
@@ -31,14 +31,14 @@ class KitchenView(OwnerListView):
             raise Http404("No MyModel matches the given query.")
         order_list = Order.objects.filter(delivered=False)
         confirm_id = request.GET.get('c')
-        #if confirm_id: confirm_id=int(confirm_id)
-        print(confirm_id)
+
         if confirm_id: # set delivered
-            order_list = order_list.exclude(id=confirm_id)
             odr = Order.objects.get(id=confirm_id)
-            odr.delivered_at = datetime.now()
-            odr.delivered = True
-            odr.save()
+            if not odr.delivered_at: # set if not delivered
+                order_list = order_list.exclude(id=confirm_id) # don't show if delivered
+                odr.delivered_at = get_now()
+                odr.delivered = True
+                odr.save()
 
         ctx = {'err_msg': "", 'order_list': get_order_list(order_list)}
         return render(request, 'kitchen_list.html', ctx)
@@ -54,19 +54,10 @@ class HistoryView(LoginRequiredMixin, View):
 class OrderListView(LoginRequiredMixin, View) :
     def get(self, request):
         ml = Meal.objects.all().order_by("name");
-        meal_id = request.GET.get('m')
-        num = request.GET.get('n')
-        if num: num = int(num)
         is_delete = request.GET.get('d')
         err_msg = ""
-        cookie_id = ""
-        cart_list = []
         price = 0
-
-        if (meal_id and num): 
-            cookie_id = "meal_id_"+meal_id
-            request.COOKIES[cookie_id] = num
-
+        cart_list = []
         delete_list = []
         for k, v in request.COOKIES.items():
             if "meal_id_" in k:
@@ -84,12 +75,8 @@ class OrderListView(LoginRequiredMixin, View) :
         ctx = {'err_msg': err_msg, 'num_list': list(range(1,10)), 'meal_list':ml, 'cart_list': cart_list, 'price':itos2(price)}
         
         response = render(request, 'orders/order_list.html', ctx)
-        # update cookie
-        if is_delete:
-            [response.delete_cookie(k) for k in delete_list]
-        elif cookie_id: # update
-            response.set_cookie(key=cookie_id, value=num)
-
+        # delete cookie
+        if is_delete: [response.delete_cookie(k) for k in delete_list]
         return response
 
 class OrderCreateView(OwnerCreateView):
@@ -113,14 +100,12 @@ class OrderCreateView(OwnerCreateView):
         return context
 
     def form_valid(self, form):
-        response = super(OrderCreateView, self).form_valid(form)#form.save(commit=False)
+        response = super(OrderCreateView, self).form_valid(form)
         for k, v in self.request.COOKIES.items():
             if "meal_id_" in k:
-                print("add meal", k)
                 meal = Meal.objects.get(id=int(k[8:]))
                 obj = MealNum.objects.create(order=self.object, meal=meal, num=v)
                 obj.save()
-                print("delete: ",k)
                 response.delete_cookie(k)
         return response
 

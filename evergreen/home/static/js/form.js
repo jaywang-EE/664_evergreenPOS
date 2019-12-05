@@ -22,3 +22,10 @@ $(".changenum").submit(function(event) {
 	$(".control h3").html("total price: " + totalprice + "$")
 
 });
+
+$(".addtocart").submit(function(event) {
+  var element = event.target;
+  var select = element.querySelector("select").value; 
+  var button = element.querySelector("button").value; 
+  document.cookie = "meal_id_"+button+"="+select+";path=/";
+});

@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.conf import settings
 
-from evergreen.timezone import ttos
-
 class Reserve(models.Model) :
     custom = models.CharField(
             max_length=200,
@@ -14,15 +12,13 @@ class Reserve(models.Model) :
     time       = models.DateTimeField()
     table      = models.ForeignKey('Table', on_delete=models.CASCADE, null=False)
     phone      = models.CharField(max_length=20)
-    person     = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)], 
-                                     verbose_name= 'Number of diners')
+    person     = models.IntegerField(verbose_name= 'Number of diners')
     owner      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     # Shows up in the admin list
     def __str__(self):
-        return "Table %s @ %s"%(self.table, ttos(self.time))
+        return "Table %s"%(self.table)
 
 class TableType(models.Model):
     name = models.CharField(max_length=200)
@@ -30,6 +26,7 @@ class TableType(models.Model):
     max_person = models.IntegerField()
     
     def range(self): return "%d~%d"%(self.min_person, self.max_person)
+    def range_full(self): return "(contain %s diners)"%self.range
     def valid(self, num): 
         if num > self.max_person:
             return "%s table can only contain %d diners"%(self.name, self.max_person)
@@ -47,4 +44,4 @@ class Table(models.Model):
     # Shows up in frontEnd
     def show(self): return "%s %s"%(self.category.name, self.name)
     # Shows up in the admin list
-    def __str__(self): return self.show()#"%s (contain %s diners)"%(self.show(), self.category.range())
+    def __str__(self): return self.show()

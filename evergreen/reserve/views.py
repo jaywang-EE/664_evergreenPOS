@@ -11,19 +11,19 @@ from datetime import datetime, timedelta
 from home.owner import OwnerListView, OwnerCreateView, OwnerDeleteView
 from .forms import CreateForm
 
-from evergreen.timezone import ttos, stot
+from evergreen.timezone import stot, get_now
 
 class ReserveListView(LoginRequiredMixin, View) :
     def get(self, request):
-        tm = request.GET.get('d')
-        now = datetime.now()
+        tm_s = request.GET.get('d')
+        tm = stot(tm_s)
+        now = get_now()
         rl = Reserve.objects.filter(time__gte=now).filter(owner=self.request.user).order_by("time");
         #init
         err_msg = ""
-        tm_str = ""
         tb_list = []
         if tm:
-            tm = stot(tm)
+            #if 1:
             try:
                 if tm<=now:
                     err_msg="No past time!"
@@ -32,15 +32,15 @@ class ReserveListView(LoginRequiredMixin, View) :
                 elif 10<tm.hour<21:
                     table_list = [obj.table for obj in Reserve.objects.filter(time=tm)]
                     for tb in Table.objects.all().order_by('category', 'name'):
-                        tb_list.append((tb, (tb not in table_list)))
-                    tm_str = ttos(tm)
+                        tb_list.append((tb, (tb not in table_list), tb.category.range()))
                 else:
                     err_msg="We open in 11:00~20:00"
+            #else:
             except: 
                 err_msg="Illegal input!"
 
         ctx = {'reserve_list': rl, 'err_msg': err_msg, 'tb_list': tb_list, 
-               'time_list':[i for i in range(11, 21)], 'tm':tm_str};
+               'time_list':[i for i in range(11, 21)], 'tm_s':tm_s, 'tm':tm};
         return render(request, 'reserves/reserve_list.html', ctx)
 
 class ReserveCreateView(OwnerCreateView):
@@ -56,7 +56,7 @@ class ReserveCreateView(OwnerCreateView):
 
     def form_valid(self, form):
         object = form.save(commit=False)
-        object.custom = str(self.request.user)
+        #object.custom = str(self.request.user)
         object.table  = Table.objects.get(id=self.request.GET.get('n'))
         object.time   = stot(self.request.GET.get('d'))
         return super(ReserveCreateView, self).form_valid(form)

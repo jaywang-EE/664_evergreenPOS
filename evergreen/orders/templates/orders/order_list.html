@@ -34,7 +34,7 @@
     <ul>
       <li>
       <div id = "form">
-      <form action="{% url 'orders:all' %}" method="get">
+      <form action="{% url 'orders:all' %}" class = "addtocart" method="get">
         <h3> {{ meal.name }} {{ meal.price }}$</h3>
       <div id = "press">
       <label for="{{meal.name}}">num: </label>
