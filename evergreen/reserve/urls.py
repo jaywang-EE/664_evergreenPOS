@@ -4,9 +4,9 @@ from . import views
 app_name='reserves'
 urlpatterns = [
     path('', views.ReserveListView.as_view(), name='all'),
-    path('reserves/create', 
+    path('create', 
         views.ReserveCreateView.as_view(success_url=reverse_lazy('reserves:all')), name='reserve_create'),
-    path('reserves/<int:pk>/delete', 
+    path('<int:pk>/delete', 
         views.ReserveDeleteView.as_view(success_url=reverse_lazy('reserves:all')), name='reserve_delete'),
 ]
 

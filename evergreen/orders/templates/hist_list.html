@@ -32,7 +32,7 @@
   {% for order, ml, pr in order_list %}
     <div class = "card">
     <p>
-    {{order.create_at}} : ${{pr}} {% if order.delivered %}delivered @ {{order.delivered_at}}{% else %}prepairing...{% endif %}
+    {{order.created_at}} : ${{pr}} {% if order.delivered %}delivered @ {{order.delivered_at}}{% else %}prepairing...{% endif %}
     </p>
     <ul>
       {% for mn in ml %}

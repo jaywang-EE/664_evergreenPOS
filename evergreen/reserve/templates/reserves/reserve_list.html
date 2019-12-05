@@ -29,7 +29,7 @@
     {% if reserve.owner == user %}
     <ul>
     <li>
-        {{ reserve }}
+        Table {{ reserve.table }} @ {{ reserve.time }}
         (<a href="{% url 'reserves:reserve_delete' reserve.id %}">Delete</a>)
     </li>
     </ul>
@@ -62,14 +62,14 @@
 <h4>Please select your prefered table.</h4>
 <p class="ps">Ps: Red tables have been occupied.</p>
 <form id = "reserve" action="{% url 'reserves:reserve_create' %}" method="get">
-<input type="hidden" name="d" value={{tm}} />
+<input type="hidden" name="d" value={{tm_s}} />
 <div id = "seats_plan">
 <div class = "seats">
 <img id = "background" src="{% static 'images/table/seats-background.png' %}" alt="background"/>
 
-{% for tb, val in tb_list %}
+{% for tb, val, rg in tb_list %}
   {% if val %}
-  <button name="n" type="submit" class="{{tb.category}}" id = "{{tb.category}}_{{tb.name}}" value={{tb.id}}>book</button>
+  <button name="n" type="submit" class="{{tb.category}}" id = "{{tb.category}}_{{tb.name}}" value={{tb.id}}>{{rg}}</button>
   {%else%}
   <div class="{{tb.category}}" id = "{{tb.category}}_{{tb.name}}" value={{tb.id}}></div>
   {%endif%}
