@@ -6,7 +6,8 @@ html{
 
 body{ 
   font-family: 'Roboto',arial,sans-serif;
-  background-image: url("../images/bg_papyrus.png");     
+  background-image: url("../images/bg_papyrus.png");  
+  background-color: white;   
   font-size: 100%;
   margin: 0;
   padding: 0;
@@ -49,7 +50,8 @@ p{
   text-align: center;
 }
 .ps{
-  color: red;
+  text-align: center;
+  color:black;
 }
 
 nav ul{

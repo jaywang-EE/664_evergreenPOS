@@ -40,23 +40,23 @@
   <h4>There are no reserves in the database.</h4>
 {% endif %}
 <h2>New Reservations</h2>
-<h4>Please select your prefered time (11:00 - 21:00) for the future 1 week.</h4>
+<h4>Please select your prefered time (11:00 - 20:00) for the future 1 week.</h4>
 <form class = "login" id = "choosetime" action="{% url 'reserves:all' %}" method="get">
-  <label for="datetimepicke">Time: </label>
+  <label for="datetimepicker">Time: </label>
   <input name="d" id="datetimepicker" type="text" autocomplete="off">
   <script>
-    $(function () {
       $("#datetimepicker").datetimepicker({
         format:'Y/m/d-H:00',
         allowTimes:[
         '11:00', '12:00','13:00','14:00','15:00','16:00',
-        '17:00', '18:00', '19:00', '20:00', '21:00'
+        '17:00', '18:00', '19:00', '20:00'
        ],
        minDate:0,
        maxDate:'+1970/01/07',
        // startDate:0,
     });
-    });
+
+    
   </script>
   <input type="submit" value="Submit">
 </form>
@@ -69,7 +69,7 @@
 
 <h3>Avalible Tables for {{tm}}:</h3>
 <h4>Please select your prefered table.</h4>
-<p class="ps">Ps: Red tables have been occupied.</p>
+<h5 class="ps">Ps: Red tables have been occupied.</h5>
 <form id = "reserve" action="{% url 'reserves:reserve_create' %}" method="get">
 <input type="hidden" name="d" value={{tm_s}} />
 <div id = "seats_plan">
