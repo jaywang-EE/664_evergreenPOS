@@ -10,7 +10,7 @@
       <li><a href="{% url 'hist' %}">History</a></li>
       <li><a href="{% url 'reserves:all' %}">Reservation</a></li>
       <li><a href="{% url 'orders:all' %}">Order</a></li>
-      <li><a href="{% url 'logout' %}?next={% url 'orders:all' %}">Log out</a></li>
+      <li><a href="{% url 'logout' %}?next={% url 'reserves:all' %}">Log out</a></li>
     </ul>
   </nav>
 </div>
@@ -26,6 +26,7 @@
     <form action="" method="POST">
       {% csrf_token %}
       <input type="submit" value="Yes, delete.">
+      <input type="submit" value="Cancel" onclick="window.location.href='{% url 'reserves:all' %}';return false;">
     </form>
   </div>
 </div>
