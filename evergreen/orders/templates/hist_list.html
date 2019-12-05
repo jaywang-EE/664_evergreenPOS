@@ -31,9 +31,13 @@
 <div class = "introduce">
   {% for order, ml, pr in order_list %}
     <div class = "card">
-    <p>
-    {{order.created_at}} : ${{pr}} {% if order.delivered %}delivered @ {{order.delivered_at}}{% else %}prepairing...{% endif %}
-    </p>
+    <h4>
+    {{order.created_at}} : ${{pr}} 
+    </h4>
+    <h5>
+    {% if order.delivered %}
+    delivered @ {{order.delivered_at}}{% else %}prepairing...{% endif %}
+     </h5>
     <ul>
       {% for mn in ml %}
       <li>

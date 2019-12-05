@@ -51,12 +51,7 @@ p{
 .ps{
   color: red;
 }
-strong{
-  color: #fff8ca;
 
-/*  color: #08f534d1;*/
-
-}
 nav ul{
   list-style-type: none;
 }
@@ -133,6 +128,7 @@ footer p{
   background-size: cover;    
   color: white;
   min-height: 400px;                /* Parallax effect */
+  background-color: black;
 }
 header h1{
   margin-bottom: 4%;
@@ -392,8 +388,8 @@ text-align: center;
 .introduce p{
   color: rgba(0,0,0, 0.8);
   margin: 5px;
-  text-align: justify;
-}
+/*  text-align: justify;
+*/}
 
 .introduce ul{
   padding: 5px;
@@ -533,6 +529,7 @@ color: red;
   border-style: none;
   background-color: white;
   filter: opacity(80%);
+  font-size:0.9em;
 }
 
 .seats .Small{
