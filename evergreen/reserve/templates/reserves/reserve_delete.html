@@ -22,7 +22,7 @@
 </header>
 <div class = "mainContent" id = "main">
   <div class = "menu" id = "menu">
-    <h3>Are you sure you want to delete the reserve: {{ reserve.table.category }} {{ reserve.table.name }} @ {{ reserve.date }} {{ reserve.hour }}?</h3>
+    <h3>Are you sure you want to delete the reserve: {{ reserve.table.category }} {{ reserve.table.name }} @ {{ reserve.time }}?</h3>
     <form action="" method="POST">
       {% csrf_token %}
       <input type="submit" value="Yes, delete.">
