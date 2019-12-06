@@ -37,6 +37,9 @@ class Nutrition():
         self.protein = meal.protein*num
         self.carbohydrates = meal.carbohydrates*num
         self.fat = meal.fat*num
+        
+    def ratio(self):
+        return {"calories":toperc(self.calories/2400), "carbohydrates":toperc(self.carbohydrates/225.0), "fat":toperc(self.fat/60.0)}
 
 def toperc(n):
     return int(n*100)
