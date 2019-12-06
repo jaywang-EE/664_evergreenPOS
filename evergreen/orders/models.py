@@ -29,6 +29,9 @@ class MealNum(models.Model):
     def __str__(self):
         return "%s: %d"%(self.meal, self.num)
 
+def toperc(n):
+    return int(n*100)
+
 class Nutrition():
     def __init__(self, meal, num):
         self.num = num
@@ -40,9 +43,6 @@ class Nutrition():
         
     def ratio(self):
         return {"calories":toperc(self.calories/2400), "carbohydrates":toperc(self.carbohydrates/225.0), "fat":toperc(self.fat/60.0)}
-
-def toperc(n):
-    return int(n*100)
 
 class Meal(models.Model):
     name = models.CharField(max_length=40)
