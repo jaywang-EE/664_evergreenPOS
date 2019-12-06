@@ -109,7 +109,7 @@
       <img src="{% static 'images/dishes/'|add:meal.image_url %}" alt="{{meal.name}}">
     </div>
     <form action="{% url 'orders:all' %}" method="get">
-      <button name="d" type="submit" value={{id}}>delete</button>
+      <button name="d" type="submit" value={{meal.id}}>delete</button>
     </form>
   </div>
   {% endfor %}
