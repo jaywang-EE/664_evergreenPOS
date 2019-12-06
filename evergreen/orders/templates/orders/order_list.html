@@ -94,7 +94,7 @@
     <label for="{{meal.name}}-select">num: </label>
     <select name="n" id = "{{meal.name}}-select">
       {% for i in num_list %}
-        {% if i == nutrition.num %}
+        {% if i == meals.num %}
         <option selected="selected">{{i}}</option>
         {% else %}
         <option>{{i}}</option>
