@@ -24,7 +24,7 @@ $(".changenum").submit(function(event) {
       console.log(dishname)
     $(dish[i]).html( dishname + ": " + dishprice + "$")
 	  totalprice = totalprice + price*number
-    $(dish_[i]).html( "Energy: " + dishcal*number +" kcal Ratio: " + dishratio*number)
+    $(dish_[i]).html( "Energy: " + dishcal*number +" kcal Ratio: " + dishratio*number+"%")
 
   	// console.log(price)
   	// console.log(number)
