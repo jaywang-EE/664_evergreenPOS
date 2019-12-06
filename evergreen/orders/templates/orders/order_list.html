@@ -91,7 +91,7 @@
     <div class="s_cal" hidden> {{meal.calories}} </div>
     <div class="s_ra" hidden> {{meal.ratio.calories}} </div>
     <h3>{{meal.name}}: {{meals.price}}$</h3>
-    <h4>Energy: {{meals.calories}} kcal Ratio: {{meals.ratio.calories}}</h4>    
+    <h4>Energy: {{meals.calories}} kcal Ratio: {{meals.ratio.calories}}%</h4>    
     <form action="{% url 'orders:all' %}" class = "changenum" method="get">
     <label for="{{meal.name}}-select">num: </label>
     <select name="n" id = "{{meal.name}}-select">
@@ -109,7 +109,7 @@
       <img src="{% static 'images/dishes/'|add:meal.image_url %}" alt="{{meal.name}}">
     </div>
     <form action="{% url 'orders:all' %}" method="get">
-      <button name="d" type="submit" value={{id}}>delete</button>
+      <button name="d" type="submit" value={{meal.id}}>delete</button>
     </form>
   </div>
   {% endfor %}
