@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.conf import settings
+from orders.models import Meal
 
 class HomeView(View):
     def get(self, request) :
@@ -10,7 +11,8 @@ class HomeView(View):
         context = {
             'installed' : settings.INSTALLED_APPS,
             'islocal'   : islocal,
-            'is_staff'  : (request.user.groups.filter(name="staff").count()>0)
+            'is_staff'  : (request.user.groups.filter(name="staff").count()>0),
+            'meal_list' : [(i+1, m) for i, m in enumerate(Meal.objects.all().order_by("name"))]
         }
         return render(request, 'home/index.html', context)
 

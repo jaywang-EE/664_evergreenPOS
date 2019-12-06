@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
+from datetime import timedelta
 from django import forms
 from datetime import date, datetime
 
@@ -30,6 +31,7 @@ class KitchenView(OwnerListView):
         if request.user.groups.filter(name="staff").count()==0:
             raise Http404("No MyModel matches the given query.")
         order_list = Order.objects.filter(delivered=False)
+        reserve_list = Reserve.objects.filter(time__gte=get_now()-timedelta(hours=1)).filter(time__lte=get_now()+timedelta(hours=2))
         confirm_id = request.GET.get('c')
 
         if confirm_id: # set delivered
@@ -40,15 +42,15 @@ class KitchenView(OwnerListView):
                 odr.delivered = True
                 odr.save()
 
-        ctx = {'err_msg': "", 'order_list': get_order_list(order_list)}
+        ctx = {'err_msg': "", 'order_list': get_order_list(order_list), "reserve_list": reserve_list}
         return render(request, 'kitchen_list.html', ctx)
 
 class HistoryView(LoginRequiredMixin, View):
     def get(self, request):
         user = request.user
         ctx = {'err_msg': "", 'username':str(user), 
-               'order_list': get_order_list(Order.objects.filter(owner=user)), 
-               'reserve_list':Reserve.objects.filter(owner=user)}
+               'order_list': get_order_list(Order.objects.filter(owner=user).order_by("created_at").reverse()), 
+               'reserve_list':Reserve.objects.filter(owner=user).order_by("time").reverse()}
         return render(request, 'hist_list.html', ctx)
 
 class OrderListView(LoginRequiredMixin, View) :

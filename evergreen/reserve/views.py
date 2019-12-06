@@ -70,3 +70,8 @@ class ReserveDeleteView(OwnerDeleteView):
     model = Reserve
     template_name = "reserves/reserve_delete.html"
 
+    def get_context_data(self, **kwargs): # visual
+        ctx = super(ReserveDeleteView, self).get_context_data(**kwargs)
+        ctx['next'] = self.request.GET.get("next")
+        return ctx
+
