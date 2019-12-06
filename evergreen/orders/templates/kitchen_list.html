@@ -56,13 +56,14 @@
 
   {% for reserve in reserve_list %}
     <div class = "card">
-    {{reserve.custom}} @ {{reserve.time}} @ {{reserve.table}}
-    (<a href="{% url 'reserves:reserve_delete' reserve.id %}?next={% url 'manage' %}">Delete</a>)
+      <h4>User: {{reserve.custom}} Time: {{reserve.time}}</h4>
+        <p>{{reserve.table}}
+    (<a href="{% url 'reserves:reserve_delete' reserve.id %}?next={% url 'manage' %}">Delete</a>)</p>
   </div>
   {% endfor %}
 </div>
 {% else %}
-<h3>There are no orders in the database.</h3>
+<h3>There are no reservations in the database.</h3>
 {% endif %}
 
 </div>
