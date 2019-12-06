@@ -68,9 +68,8 @@ class OrderListView(LoginRequiredMixin, View) :
                     delete_list.append(k)
                     continue
                 meal = Meal.objects.get(id=meal_id)
-                sub_price = meal.price*int(v)
-                price += sub_price
-                cart_list.append((meal.name, meal.image_url, meal.id, int(v), meal.price))
+                price += meal.price*int(v)
+                cart_list.append((meal, int(v)))
 
         if not cart_list: err_msg = "Please pick something into cart~"
         else: cart_list.sort()

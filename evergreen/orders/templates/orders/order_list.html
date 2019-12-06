@@ -85,12 +85,14 @@
 
 <div class = "introduce" id = "cart">
 
-  {% for name, url, id, num, sub_price in cart_list %}
+  {% for meal, num in cart_list %}
   <div class = "card">
-    <h3>{{name}}: {{sub_price}}$</h3>
+    <h3>{{meal.name}}: {{meal.price}}$</h3>
+    {{meal.calories}}
+    {{meal.ratio.calories}}%
     <form action="{% url 'orders:all' %}" class = "changenum" method="get">
-    <label for="{{name}}-select">num: </label>
-    <select name="n" id = "{{name}}-select">
+    <label for="{{meal.name}}-select">num: </label>
+    <select name="n" id = "{{meal.name}}-select">
       {% for i in num_list %}
         {% if i == num %}
         <option selected="selected">{{i}}</option>
@@ -99,10 +101,10 @@
         {% endif %}
       {% endfor %}
     </select>
-    <button name="m" type="submit" value={{id}}>change num</button>
+    <button name="m" type="submit" value={{meal.id}}>change num</button>
     </form>
     <div class="column">
-      <img src="{% static 'images/dishes/'|add:url %}" alt="{{name}}">
+      <img src="{% static 'images/dishes/'|add:meal.image_url %}" alt="{{meal.name}}">
     </div>
     <form action="{% url 'orders:all' %}" method="get">
       <button name="d" type="submit" value={{id}}>delete</button>

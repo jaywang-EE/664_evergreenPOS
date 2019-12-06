@@ -29,6 +29,18 @@ class MealNum(models.Model):
     def __str__(self):
         return "%s: %d"%(self.meal, self.num)
 
+class ratio():
+    def __init__(self, meal, num):
+        self.num = num
+        self.price = meal.price*num
+        self.calories = meal.calories*num
+        self.protein = meal.protein*num
+        self.carbohydrates = meal.carbohydrates*num
+        self.fat = meal.fat*num
+
+def toperc(n):
+    return int(n*100)
+
 class Meal(models.Model):
     name = models.CharField(max_length=40)
     image_url = models.CharField(max_length=60)
@@ -38,6 +50,17 @@ class Meal(models.Model):
     protein = models.FloatField(null=True)
     carbohydrates = models.FloatField(null=True)
     fat = models.FloatField(null=True)
+
+    def ratio(self):
+        return {"calories":toperc(self.calories/2400), "carbohydrates":toperc(self.carbohydrates/225.0), "fat":toperc(self.fat/60.0)}
+    
+    def __lt__(self, ml):
+        return self.name<ml.name
+    def __gt__(self, ml):        
+        return self.name>ml.name
+
+    def __mul__(self, n):
+        return Nutrition(self, n)
     
     def __str__(self):
         return self.name
