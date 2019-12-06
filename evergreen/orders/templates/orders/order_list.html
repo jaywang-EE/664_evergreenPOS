@@ -87,9 +87,11 @@
 
   {% for meal, meals in cart_list %}
   <div class = "card">
-    <h3>{{meal.name}}: {{meal.price}}$</h3>
-    {{meal.calories}}
-    {{meal.ratio.calories}}%
+    <div class="s_price" hidden> {{meal.price}} </div>
+    <div class="s_cal" hidden> {{meal.calories}} </div>
+    <div class="s_ra" hidden> {{meal.ratio.calories}} </div>
+    <h3>{{meal.name}}: {{meals.price}}$</h3>
+    <h4>Energy: {{meals.calories}} kcal Ratio: {{meals.ratio.calories}}</h4>    
     <form action="{% url 'orders:all' %}" class = "changenum" method="get">
     <label for="{{meal.name}}-select">num: </label>
     <select name="n" id = "{{meal.name}}-select">
