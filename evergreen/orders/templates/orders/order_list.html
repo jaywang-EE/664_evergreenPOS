@@ -85,7 +85,7 @@
 
 <div class = "introduce" id = "cart">
 
-  {% for meal, nutrition in cart_list %}
+  {% for meal, meals in cart_list %}
   <div class = "card">
     <h3>{{meal.name}}: {{meal.price}}$</h3>
     {{meal.calories}}
