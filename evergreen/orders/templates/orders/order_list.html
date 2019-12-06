@@ -35,7 +35,7 @@
       <li>
       <div id = "form">
       <form action="{% url 'orders:all' %}" class = "addtocart" method="get">
-        <h3> {{ meal.name }} {{ meal.price }}$</h3>
+        <h3> {{ meal.name }} {{ meal.price }}$ {{meal.calories}}kcal</h3>
       <div id = "press">
       <label for="{{meal.name}}">num: </label>
       <select name="n" id = "{{meal.name}}">
