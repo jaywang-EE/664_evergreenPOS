@@ -30,7 +30,7 @@
     <ul>
     <li>
         Table {{ reserve.table }} @ {{ reserve.time }}
-        (<a href="{% url 'reserves:reserve_delete' reserve.id %}">Delete</a>)
+        (<a href="{% url 'reserves:reserve_delete' reserve.id %}?next={% url 'reserves:all' %}">Delete</a>)
     </li>
     </ul>
     {% endif %}
@@ -53,7 +53,6 @@
        ],
        minDate:0,
        maxDate:'+1970/01/07',
-       // startDate:0,
     });
 
     

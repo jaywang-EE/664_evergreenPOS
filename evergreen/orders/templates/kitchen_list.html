@@ -48,6 +48,23 @@
 {% else %}
 <h3>There are no orders in the database.</h3>
 {% endif %}
+
+
+<h2>Today's reserve List</h2>
+{% if reserve_list %}
+<div class = "introduce">
+
+  {% for reserve in reserve_list %}
+    <div class = "card">
+    {{reserve.custom}} @ {{reserve.time}} @ {{reserve.table}}
+    (<a href="{% url 'reserves:reserve_delete' reserve.id %}?next={% url 'manage' %}">Delete</a>)
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<h3>There are no orders in the database.</h3>
+{% endif %}
+
 </div>
 </div>
 {% endblock %}
