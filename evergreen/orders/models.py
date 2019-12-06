@@ -29,7 +29,7 @@ class MealNum(models.Model):
     def __str__(self):
         return "%s: %d"%(self.meal, self.num)
 
-class ratio():
+class Nutrition():
     def __init__(self, meal, num):
         self.num = num
         self.price = meal.price*num

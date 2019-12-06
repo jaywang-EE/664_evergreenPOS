@@ -85,7 +85,7 @@
 
 <div class = "introduce" id = "cart">
 
-  {% for meal, num in cart_list %}
+  {% for meal, meals in cart_list %}
   <div class = "card">
     <h3>{{meal.name}}: {{meal.price}}$</h3>
     {{meal.calories}}
@@ -94,7 +94,7 @@
     <label for="{{meal.name}}-select">num: </label>
     <select name="n" id = "{{meal.name}}-select">
       {% for i in num_list %}
-        {% if i == num %}
+        {% if i == nutrition.num %}
         <option selected="selected">{{i}}</option>
         {% else %}
         <option>{{i}}</option>
