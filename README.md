@@ -62,5 +62,5 @@ Homepage
 
 1. Booking System will get time and table automatically  
 
-2. fill in the custom name and number of diners.  
+2. fill in the custom name，number of diners and phone number.  
 
