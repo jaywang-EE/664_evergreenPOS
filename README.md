@@ -1,4 +1,4 @@
-# 664_evergreenPOS
+# Evergreen Restaurant Online System
 This is the repo. of final project in SI664.
 Our group includes two people - Xin Hu and Chiaming Wang.
 
