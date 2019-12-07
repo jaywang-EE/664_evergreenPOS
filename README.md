@@ -40,7 +40,7 @@ Homepage
 2. clicking on the navigation bar, users can come back to the home page, sign up, log in and log out.
 
 ## Airplane-liked Reservation System
-### Searching System ( GUI coming soon )
+### Searching System
 <img src="UI/7 reserve search.png" />
 
 1. click block and choose book time  
@@ -52,7 +52,7 @@ Homepage
 4. press table U want and redirect to Booking System  
 
 ### Booking System (after clicking table button above)
-<img src="UI/6 reserve page.png" />
+<img src="UI/8 reserve confirm.png" />
 
 1. Booking System will get time and table automatically  
 
