@@ -22,12 +22,12 @@ Homepage
     └── Current status of seats
 
 ```
-## Home Page and Login Page
+## Home Page and Login and Sign up Page
 ### Home page (responsive design)
 <img src="UI/1 home page.jpg" />
 
 1. responsive design, suitable for mobile, tablets and desktop.
-2. clicking on the navigation bar, users can go to every section in this page including About, Gallery, Menu, Order and Reservation.
+2. clicking on the navigation bar, users can go to every section in this page including About, Gallery, Menu, Order and Reservation and login.
 3. header part introduces the restaurant and the text has a typewriter effect. 
 4. gallery shows 12 images of dishes and can switch by clicking on the thumbnails of images or the arrows beside the image.
 5. menu shows dishes' names, prices and descriptions. 
@@ -37,7 +37,13 @@ Homepage
 
 1. responsive design, suitable for mobile, tablets and desktop.
 
-2. clicking on the navigation bar, users can come back to the home page, sign up, log in and log out.
+2. clicking on the navigation bar, users can come back to the home page or sign up page.
+### Sign up page (responsive design)
+<img src="UI/3 signup page.png" />
+
+1. responsive design, suitable for mobile, tablets and desktop.
+
+2. clicking on the navigation bar, users can come back to the home page or login page.
 
 ## Airplane-liked Reservation System
 ### Searching System
