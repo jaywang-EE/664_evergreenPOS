@@ -24,7 +24,7 @@ Homepage
 ```
 ## Home Page and Login Page
 ### Home page (responsive design)
-<img src="UI/homepage.jpg" />
+<img src="UI/1 home page.jpg" />
 
 1. responsive design, suitable for mobile, tablets and desktop.
 2. clicking on the navigation bar, users can go to every section in this page including About, Gallery, Menu, Order and Reservation.
@@ -33,7 +33,7 @@ Homepage
 5. menu shows dishes' names, prices and descriptions. 
 6. green buttons in order section and reservation section can direct users to the corresponding pages(order page has not finished).
 ### Login page (responsive design)
-<img src="UI/loginpage.png" />
+<img src="UI/2 login page.png" />
 
 1. responsive design, suitable for mobile, tablets and desktop.
 
@@ -41,7 +41,7 @@ Homepage
 
 ## Airplane-liked Reservation System
 ### Searching System ( GUI coming soon )
-<img src="UI/search.png" />
+<img src="UI/7 reserve search.png" />
 
 1. click block and choose book time  
 
@@ -52,7 +52,7 @@ Homepage
 4. press table U want and redirect to Booking System  
 
 ### Booking System (after clicking table button above)
-<img src="UI/detail.png" />
+<img src="UI/6 reserve page.png" />
 
 1. Booking System will get time and table automatically  
 
